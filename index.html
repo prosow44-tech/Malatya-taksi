@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malatya-Taksi Zeynal Ağca</title>
     <style>
-        /* 1. RENK VE TEMA AYARLARI */
+        /* 1. RENK, TEMA VE DEEP GLASS AYARLARI */
         :root {
             --taxi-yellow: #ffca08;
             --taxi-orange: #ff8008;
-            --glass-black: rgba(0, 0, 0, 0.96); /* Hakkımızda'daki aynı derin siyah */
+            --glass-black: rgba(0, 0, 0, 0.96); /* Derin Saydam Siyah Zemin */
+            --gb-blur: blur(25px); /* Yoğun Gauss Bulanıklığı */
             --text-light: #f4f4f4;
-            --gb-blur: blur(25px); /* Hakkımızda'daki aynı Gauss Bulanıklığı */
         }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', sans-serif;
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: #000; color: var(--text-light); scroll-behavior: smooth;
         }
 
-        /* 2. SARI -> TURUNCU AKAN NEON ÇİZGİLER */
+        /* 2. SARI -> TURUNCU AKAN NEON ÇİZGİLER (FRAME YAPISI) */
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .neon-bar {
             height: 6px; width: 100%;
@@ -30,7 +30,7 @@
             position: relative; z-index: 1500;
         }
 
-        /* 3. ÜST PANEL (HAKKIMIZDA STİLİ İLE BİRLEŞTİRİLDİ) */
+        /* 3. ÜST PANEL (HEADER - YÜZEN VIP CAM EFEKTİ) */
         header {
             position: sticky; top: 15px; z-index: 1000;
             margin: 0 5% 20px 5%; width: 90%; 
@@ -49,14 +49,14 @@
         .hero {
             position: relative; width: 100%; height: 100vh;
             background: url('ezgif.com-animated-gif-maker.gif') no-repeat center center;
-            background-size: cover;
+            background-size: cover; 
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center;
         }
         .hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); }
 
-        /* YAZI ANİMASYONLARI */
-        .text-area { position: relative; height: 80px; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        /* YAZI ANİMASYON ALANLARI (ÜST VE ALT GRUP) */
+        .text-wrapper { position: relative; width: 100%; height: 80px; z-index: 10; display: flex; justify-content: center; align-items: center; }
         .anim-text {
             position: absolute; font-size: 34px; font-weight: 800; color: #fff;
             text-shadow: 0 5px 30px rgba(0,0,0,1); opacity: 0; transition: 0.5s ease-in-out;
@@ -73,25 +73,32 @@
         }
         .btn-call { background: linear-gradient(135deg, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; color: #000; }
         .btn-wp { background: linear-gradient(135deg, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; }
+        .my-btn:hover { transform: scale(1.05); }
 
-        /* 5. ÖZELLİKLER (4 YUVARLAK) */
-        .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; padding: 60px 10%; background: #0a0a0a; }
-        .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 210px; }
-        .icon { width: 90px; height: 90px; background: var(--taxi-yellow); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin-bottom: 15px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .f-title { font-weight: 800; font-size: 18px; color: var(--taxi-yellow); }
-
-        /* 6. HAKKINDA (SAYDAM SİYAH & GAUSS & ÇERÇEVE) */
+        /* 5. HAKKINDA VE BÜTÜNLEŞİK YUVARLAK ÖZELLİKLER */
         .about-wrap { padding: 120px 5%; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('gece.webp') fixed center; background-size: cover; display: flex; justify-content: center; }
         .about-box {
             background: var(--glass-black);
             backdrop-filter: var(--gb-blur);
             -webkit-backdrop-filter: var(--gb-blur);
             padding: 70px 50px; border-radius: 40px; width: 100%; max-width: 1050px;
-            border: 2px solid var(--taxi-orange); /* Turuncu Çerçeve */
-            box-shadow: 0 30px 60px rgba(0,0,0,1);
+            border: 2px solid var(--taxi-orange); box-shadow: 0 30px 60px rgba(0,0,0,1);
+            display: flex; flex-direction: column; align-items: center; /* Merkeze hizalar */
         }
+        .about-content-text { font-size: 1.25rem; line-height: 2.1; color: #ddd; text-align: center; width: 100%; }
+        
+        /* Yuvarlakları Hakkında Paneli İçinde Hizalama */
+        .about-features-container {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+            margin-top: 50px; /* Metin ile arası */
+            width: 100%;
+        }
+        .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 210px; transition: transform 0.3s ease; }
+        .f-item:hover { transform: translateY(-10px); }
+        .icon { width: 90px; height: 90px; background: var(--taxi-yellow); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin-bottom: 15px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .f-title { font-weight: 800; font-size: 18px; color: var(--taxi-yellow); text-transform: uppercase; }
 
-        /* 7. ALT PANEL (HAKKIMIZDA STİLİ İLE BİRLEŞTİRİLDİ) */
+        /* 6. ALT PANEL (FOOTER - YÜZEN VIP CAM EFEKTİ) */
         footer {
             margin: 20px 5% 0 5%; width: 90%;
             background: var(--glass-black);
@@ -107,6 +114,7 @@
             header, footer { width: 96%; margin: 10px 2%; }
             .btn-group { flex-direction: column; }
             .anim-text { font-size: 24px; }
+            .about-box { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -134,19 +142,19 @@
 
     <div class="neon-bar"></div>
 
-    <section class="features">
-        <div class="f-item"><div class="icon">🚕</div><div class="f-title">7/24 MALATYA TAKSİ</div></div>
-        <div class="f-item"><div class="icon">💰</div><div class="f-title">UYGUN FİYAT</div></div>
-        <div class="f-item"><div class="icon">⏱️</div><div class="f-title">TAM ZAMANINDA</div></div>
-        <div class="f-item"><div class="icon">✨</div><div class="f-title">VIP & KONFORLU</div></div>
-    </section>
-
     <section class="about-wrap">
         <div class="about-box">
             <h2 style="color:var(--taxi-yellow); text-align:center; font-size:2.8rem; margin-bottom:40px;">Hakkımızda</h2>
-            <div style="font-size:1.25rem; line-height:2.1; color:#ddd; text-align:center;">
+            <div class="about-content-text">
                 <p>Malatya'da ulaşım ihtiyacınız olduğunda <b>Malatya taksi numarası</b> aramanıza gerek kalmadan tek tuşla yanınızdayız. <b>Malatya en yakın taksi</b> hizmeti anlayışımızla, bulunduğunuz konuma dakikalar içinde ulaşıyoruz. Malatya-Taksi Zeynal Ağca, uygun fiyat, temiz araç ve güvenli sürüş garantisiyle alo taksi hattınızda bir telefon kadar uzağınızda.</p>
-                <p style="margin-top:30px;">• Otogar, Havalimanı, Battalgazi, Yeşilyurt, Hastaneler ve Şehirler Arası VIP transfer.</p>
+                <p>Otogar, Havalimanı, Battalgazi, Yeşilyurt, Hastaneler ve Şehirler Arası VIP transfer.</p>
+            </div>
+
+            <div class="about-features-container">
+                <div class="f-item"><div class="icon">🚕</div><div class="f-title">7/24 MALATYA TAKSİ</div></div>
+                <div class="f-item"><div class="icon">💰</div><div class="f-title">UYGUN FİYAT</div></div>
+                <div class="f-item"><div class="icon">⏱️</div><div class="f-title">TAM ZAMANINDA</div></div>
+                <div class="f-item"><div class="icon">✨</div><div class="f-title">VIP & KONFORLU</div></div>
             </div>
         </div>
     </section>
