@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malatya-Taksi Zeynal Ağca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --taxi-yellow: #ffca08;
@@ -14,7 +15,7 @@
         }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0; padding: 0; width: 100%; font-family: 'Montserrat', sans-serif;
             background-color: #000; color: var(--text-white); scroll-behavior: smooth;
             overflow-x: hidden;
         }
@@ -30,14 +31,44 @@
             z-index: 100; position: relative;
         }
 
-        /* 2. ÜST PANEL & GÜÇLÜ AKTİF SİNYALİ */
+        /* 2. ÜST PANEL & LOGO TASARIMI */
         header {
             background: rgba(0, 0, 0, 0.6); backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
             padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
-        .logo span { color: var(--taxi-yellow); }
+
+        /* Logo Güncellemesi */
+        .logo { 
+            font-weight: 700; 
+            font-size: 1.6rem; 
+            letter-spacing: -0.5px; 
+            display: flex; 
+            align-items: center;
+            gap: 10px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .logo span { 
+            color: var(--taxi-yellow); 
+            font-weight: 900; 
+            text-transform: uppercase;
+            position: relative;
+            background: linear-gradient(to right, #ffca08, #fff, #ffca08);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         @keyframes signal-glow {
             0% { box-shadow: 0 0 5px #00ff88; transform: scale(1); }
@@ -77,7 +108,7 @@
         .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 45px 15px 15px 45px; color: #000; }
         .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 15px 45px 45px 15px; }
 
-        /* 4. HAKKIMIZDA (CAM KUTU) */
+        /* 4. HAKKIMIZDA */
         .about-wrap { padding: 120px 5%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('gece.webp') fixed center; background-size: cover; }
         .about-box {
             background: rgba(255, 255, 255, 0.05);
@@ -103,7 +134,12 @@
             padding: 60px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        @media (max-width: 768px) { .btn-container { flex-direction: column; align-items: center; } .anim-text { font-size: 26px; } .my-btn { width: 95%; } }
+        @media (max-width: 768px) { 
+            .btn-container { flex-direction: column; align-items: center; } 
+            .anim-text { font-size: 26px; } 
+            .my-btn { width: 95%; } 
+            .logo { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -111,7 +147,9 @@
     <div class="neon-bar"></div>
 
     <header>
-        <div class="logo">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
+        <div class="logo">
+            <span>🚖 Malatya-Taksi</span> Zeynal Ağca
+        </div>
         <div class="status-active">● ŞU AN AKTİF</div>
     </header>
 
@@ -156,7 +194,7 @@
                 <div class="f-item">
                     <div class="icon">🚕</div>
                     <div class="f-title">7/24 HİZMET</div>
-                    <div class="f-desc">Zaman fark etmeksizin yanınızdayız.</div>
+                    <div class="f-desc">Zaman fark etmeksizen yanınızdayız.</div>
                 </div>
                 <div class="f-item">
                     <div class="icon">💰</div>
