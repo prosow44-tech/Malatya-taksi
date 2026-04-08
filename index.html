@@ -8,7 +8,8 @@
         :root {
             --taxi-yellow: #ffca08;
             --taxi-orange: #ff8008;
-            --glass-dark: rgba(0, 0, 0, 0.75);
+            --glass-panel: rgba(255, 255, 255, 0.05); /* Şeffaf cam katmanı */
+            --glass-dark: rgba(0, 0, 0, 0.7); /* Koyu cam katmanı */
             --gb-blur: blur(25px);
             --text-white: #ffffff;
         }
@@ -16,17 +17,10 @@
         body, html {
             margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: #000; color: var(--text-white); scroll-behavior: smooth;
-            overflow-x: hidden; cursor: crosshair;
+            overflow-x: hidden;
         }
 
-        /* FARE TAKİP EFEKTİ (GLOW) */
-        #cursor-glow {
-            position: fixed; width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(255, 202, 8, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%; pointer-events: none; z-index: 9999;
-            transform: translate(-50%, -50%); transition: transform 0.1s ease;
-        }
-
+        /* 1. NEON AKIŞ ÇİZGİSİ */
         .neon-bar {
             height: 6px; width: 100%;
             background: linear-gradient(90deg, var(--taxi-yellow), var(--taxi-orange), var(--taxi-yellow));
@@ -35,6 +29,7 @@
         }
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
+        /* 2. ÜST PANEL & AKTİF ANİMASYONU */
         header {
             background: var(--glass-dark); backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
@@ -43,9 +38,20 @@
         .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
         .logo span { color: var(--taxi-yellow); }
 
+        @keyframes pulse-status {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+        .status-active {
+            font-weight: 800; color: #00ff88; font-size: 0.85rem;
+            animation: pulse-status 1.5s infinite; display: inline-block;
+        }
+
+        /* 3. ANA SAYFA (AZALTILMIŞ KARARTMA) */
         .hero {
             position: relative; width: 100%; height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('ezgif.com-animated-gif-maker.gif') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('ezgif.com-animated-gif-maker.gif') no-repeat center center;
             background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
@@ -65,16 +71,19 @@
         .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; color: #000; }
         .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; }
 
-        .about-wrap { padding: 100px 5%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('gece.webp') fixed center; background-size: cover; }
+        /* 4. HAKKIMIZDA (CAM EFEKTİ GERİ GELDİ) */
+        .about-wrap { padding: 100px 5%; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('gece.webp') fixed center; background-size: cover; }
         .about-box {
-            background: var(--glass-dark); backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
+            background: rgba(255, 255, 255, 0.06); /* Saydam beyaz dokunuşu */
+            backdrop-filter: var(--gb-blur);
+            -webkit-backdrop-filter: var(--gb-blur);
             padding: 60px 40px; border-radius: 40px; width: 100%; max-width: 1100px; margin: 0 auto;
-            border: 1px solid rgba(255, 128, 8, 0.4); box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15); /* İnce cam kenarlığı */
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
         }
 
         .features-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 50px; }
-        .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 210px; transition: 0.3s; }
-        .f-item:hover { transform: scale(1.05); }
+        .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 210px; }
         .icon {
             width: 80px; height: 80px; background: var(--taxi-yellow); border-radius: 50%;
             display: flex; justify-content: center; align-items: center; font-size: 38px;
@@ -93,12 +102,11 @@
 </head>
 <body>
 
-    <div id="cursor-glow"></div>
     <div class="neon-bar"></div>
     
     <header>
         <div class="logo">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
-        <div style="font-weight: 800; color: #00ff88; font-size: 0.9rem;">● ŞU AN AKTİF</div>
+        <div class="status-active">● ŞU AN AKTİF</div>
     </header>
 
     <section class="hero">
@@ -127,9 +135,10 @@
             <h2 style="color:var(--taxi-yellow); text-align:center; font-size:2.8rem; margin-bottom:30px;">Hakkımızda</h2>
             <div style="font-size:1.2rem; line-height:2; color:#eee; text-align:center;">
                 <p>Malatya-Taksi Zeynal Ağca olarak, müşteri memnuniyetini en üst seviyede tutuyoruz. Modern araç filomuz ve deneyimli şoförlerimizle, Malatya'nın her noktasına en kısa sürede ulaşıyoruz.</p>
-                <div style="background: rgba(255, 202, 8, 0.1); padding: 20px; border-radius: 20px; border-left: 5px solid var(--taxi-yellow); margin-top: 30px; text-align: left;">
-                    <h3 style="color: var(--taxi-yellow); margin-top: 0;">Neden Biz?</h3>
-                    <ul style="list-style: none; padding: 0;">
+                
+                <div style="background: rgba(255, 202, 8, 0.1); padding: 25px; border-radius: 20px; border-left: 5px solid var(--taxi-yellow); margin-top: 35px; text-align: left;">
+                    <h3 style="color: var(--taxi-yellow); margin-top: 0; font-size: 1.5rem;">Neden Biz?</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
                         <li>🚀 <b>Hızlı Erişim:</b> Çağrınızdan sonra dakikalar içinde kapınızdayız.</li>
                         <li>💎 <b>VIP Konfor:</b> Araçlarımız düzenli olarak temizlenir ve bakımları yapılır.</li>
                         <li>💳 <b>Şeffaf Fiyat:</b> Sürpriz ücret yok, her zaman en uygun tarife.</li>
@@ -166,25 +175,19 @@
 
     <footer>
         <div style="font-size:14px; color:#bbb; max-width:850px; margin:0 auto; line-height:1.7;">
-            <b>Gizlilik Politikası:</b> malatya-taksi.com olarak, paylaştığınız telefon numaraları sadece ulaşım hizmeti sağlamak amacıyla kullanılır. Bilgileriniz KVKK kapsamında korunmaktadır.
+            <b>Gizlilik Politikası:</b> malatya-taksi.com olarak, müşterilerimizin gizliliğine önem veriyoruz. Paylaştığınız telefon numaraları, sadece ulaşım hizmeti sağlamak amacıyla kullanılır. Bilgileriniz KVKK kapsamında korunmaktadır.
         </div>
         <div style="margin-top:30px; color:var(--taxi-yellow); font-weight:bold; font-size: 13px;">© 2026 Zeynal Ağca - Malatya VIP Hattı</div>
     </footer>
 
     <script>
-        // Metin Döngüsü
         function loop(s, t) {
             const el = document.querySelectorAll(s); let i = 0;
-            setInterval(() => { el[i].classList.remove('active'); i = (i + 1) % el.length; el[i].classList.add('active'); }, t);
+            if(el.length > 0) {
+                setInterval(() => { el[i].classList.remove('active'); i = (i + 1) % el.length; el[i].classList.add('active'); }, t);
+            }
         }
         loop('.g1', 2500); loop('.g2', 2000);
-
-        // Fare Glow Efekti
-        const glow = document.getElementById('cursor-glow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
     </script>
 </body>
 </html>
