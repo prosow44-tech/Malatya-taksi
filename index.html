@@ -5,122 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malatya-Taksi Zeynal Ağca</title>
     <style>
-        /* 1. TEMEL AYARLAR */
+        /* 1. TEMEL DEĞİŞKENLER */
         :root {
             --taxi-yellow: #ffca08;
             --taxi-orange: #ff8008;
             --whatsapp-green: #25d366;
-            --panel-bg: rgba(20, 20, 25, 0.7); /* Saydam Şık Füme */
+            --panel-white: rgba(255, 255, 255, 0.9); /* Saydam Beyaz */
+            --text-dark: #1a1a1a;
         }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0a0a0a; color: white; scroll-behavior: smooth;
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f4f4; color: var(--text-dark); scroll-behavior: smooth;
         }
 
-        /* 2. NEON RENK GEÇİŞ ANİMASYONU (Sarı -> Turuncu) */
+        /* 2. SARI -> TURUNCU NEON GEÇİŞİ (KESİN ÇÖZÜM) */
         @keyframes neon-flow {
             0% { 
                 border-color: var(--taxi-yellow); 
-                box-shadow: 0 0 8px var(--taxi-yellow), 0 0 15px var(--taxi-yellow); 
+                box-shadow: 0 0 10px var(--taxi-yellow), 0 5px 15px rgba(255, 202, 8, 0.4); 
             }
             50% { 
                 border-color: var(--taxi-orange); 
-                box-shadow: 0 0 10px var(--taxi-orange), 0 0 20px var(--taxi-orange); 
+                box-shadow: 0 0 15px var(--taxi-orange), 0 5px 20px rgba(255, 128, 8, 0.5); 
             }
             100% { 
                 border-color: var(--taxi-yellow); 
-                box-shadow: 0 0 8px var(--taxi-yellow), 0 0 15px var(--taxi-yellow); 
+                box-shadow: 0 0 10px var(--taxi-yellow), 0 5px 15px rgba(255, 202, 8, 0.4); 
             }
         }
 
-        /* 3. ÜST PANEL (SAYDAM VE ŞIK) */
+        /* 3. ÜST PANEL (BEYAZ & SAYDAM) */
         header {
-            background: var(--panel-bg);
-            backdrop-filter: blur(10px); /* Cam efekti */
-            padding: 12px 5%;
+            background: var(--panel-white);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 3px solid var(--taxi-yellow);
+            border-bottom: 4px solid var(--taxi-yellow);
             animation: neon-flow 3s infinite ease-in-out;
             position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
-        .logo span { color: var(--taxi-yellow); }
+        .logo { font-weight: 900; font-size: 1.2rem; color: var(--text-dark); }
+        .logo span { color: var(--taxi-orange); }
 
-        /* CANLI DURUM ROZETİ (EKSRA) */
-        .status-badge {
-            display: flex; align-items: center; gap: 6px; font-size: 0.75rem;
-            background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px;
-            border: 1px solid var(--whatsapp-green);
-        }
-        .dot { width: 8px; height: 8px; background: var(--whatsapp-green); border-radius: 50%; animation: pulse-green 1.5s infinite; }
-
-        /* 4. ANA SAYFA (GIF ARKA PLAN) */
+        /* 4. ANA GIF (BOYUTA SADIK TASARIM) */
         .hero {
-            position: relative; width: 100%; height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('ezgif.com-animated-gif-maker.gif');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            position: relative; width: 100%; 
+            min-height: 70vh; /* GIF'in küçük kalmaması için dengeli yükseklik */
+            background: url('ezgif.com-animated-gif-maker.gif');
+            background-size: cover; /* Fotoğrafı kesmeden sığdırır */
+            background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         /* METİN DÖNGÜSÜ */
-        .text-area { position: relative; width: 100%; height: 50px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .text-area { position: relative; height: 50px; width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
         .anim-text {
-            position: absolute; font-size: 24px; font-weight: 900;
-            color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,1);
+            position: absolute; font-size: 28px; font-weight: 900;
+            color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.8);
             opacity: 0; transition: 0.5s ease-in-out;
         }
-        .c-gold { color: var(--taxi-yellow); }
+        .anim-text.active { opacity: 1; }
 
-        /* 5. NABIZ ATAN BUTONLAR */
-        .btn-area { display: flex; justify-content: center; gap: 10px; z-index: 100; }
+        /* 5. BUTONLAR */
+        .btn-area { display: flex; gap: 10px; z-index: 100; }
         .my-btn {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 170px; height: 70px; color: white; font-weight: bold; text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.2s;
+            width: 170px; height: 75px; color: white; font-weight: bold; text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.2s;
         }
-        .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 30px 5px 5px 30px; animation: pulse-orange 2s infinite; color: #000; }
-        .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 5px 30px 30px 5px; animation: pulse-green 2s infinite; animation-delay: 1s; }
-        .my-btn:active { transform: scale(0.9); }
-        .sub-txt { font-size: 10px; font-weight: normal; margin-top: 2px; }
+        .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 30px 8px 8px 30px; color: #000; }
+        .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 8px 30px 30px 8px; }
 
-        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 128, 8, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 128, 8, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 128, 8, 0); } }
-        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-
-        /* 6. HAKKINDA BÖLÜMÜ (SAYDAM TEMA) */
+        /* 6. HAKKINDA (KARE FORMAT & PARLAK) */
         .about-section {
             padding: 80px 5%;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('gece.webp');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            background: url('gece.webp') no-repeat center center;
+            background-size: cover; background-attachment: fixed;
             display: flex; justify-content: center;
-            border-top: 3px solid var(--taxi-yellow);
+            border-top: 4px solid var(--taxi-yellow);
             animation: neon-flow 3s infinite ease-in-out;
         }
-        .about-content {
-            background: rgba(15, 15, 20, 0.6);
-            padding: 35px; border-radius: 20px; max-width: 800px;
-            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1);
-        }
-        .service-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .service-list li { background: rgba(255, 202, 8, 0.1); padding: 8px; border-radius: 8px; border-left: 3px solid var(--taxi-yellow); font-size: 0.95rem; }
-
-        /* 7. GİZLİLİK POLİTİKASI (ALT KISIM) */
-        footer {
-            background: #050505; padding: 40px 10%;
-            border-top: 3px solid var(--taxi-yellow);
-            animation: neon-flow 3s infinite ease-in-out;
+        .about-square {
+            background: rgba(255, 255, 255, 0.85); /* Kare kutu beyaz ve saydam */
+            padding: 40px; 
+            width: 400px; height: 400px; /* TAM KARE */
+            display: flex; flex-direction: column; justify-content: center;
+            border-radius: 20px; border: 2px solid var(--taxi-yellow);
+            color: var(--text-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
         }
-        .privacy-text {
-            font-size: 13px; color: #777; line-height: 1.6; max-width: 700px; margin: 0 auto;
-            font-family: 'Arial', sans-serif; /* Daha sade punto için */
+        .about-square h2 { color: var(--taxi-orange); margin-bottom: 15px; }
+
+        /* 7. ALT PANEL (ÜST PANELİN AYNISI) */
+        footer {
+            background: var(--panel-white);
+            backdrop-filter: blur(10px);
+            padding: 30px 10%;
+            border-top: 4px solid var(--taxi-yellow);
+            animation: neon-flow 3s infinite ease-in-out;
+            text-align: center; color: var(--text-dark);
         }
-        .privacy-text b { color: #aaa; }
+        .privacy-text { font-size: 13px; line-height: 1.6; max-width: 800px; margin: 0 auto; color: #555; }
 
         @media (max-width: 600px) {
-            .service-list { grid-template-columns: 1fr; }
-            .btn-area { flex-direction: column; align-items: center; }
-            .my-btn { width: 80%; border-radius: 25px; }
+            .about-square { width: 90%; height: auto; padding: 30px 20px; }
+            .btn-area { flex-direction: column; }
+            .my-btn { width: 220px; border-radius: 25px; }
         }
     </style>
 </head>
@@ -128,41 +119,27 @@
 
     <header>
         <div class="logo">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
-        <div class="status-badge">
-            <div class="dot"></div>
-            Şu An Aktif
-        </div>
+        <div style="font-size: 0.8rem; font-weight: bold; color: var(--whatsapp-green);">● 7/24 AKTİF</div>
     </header>
 
     <section class="hero">
-        <div id="top-area" class="text-area">
-            <div class="anim-text t-group1" style="opacity: 1;">Malatya <span class="c-gold">VIP</span> Taksi 🚖</div>
-            <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Hizmetinizde ✨</div>
-            <div class="anim-text t-group1">7/24 <span class="c-gold">Güvenli</span> Ulaşım 🛡️</div>
+        <div class="text-area">
+            <div class="anim-text active">Malatya <span style="color:var(--taxi-yellow)">VIP</span> Taksi</div>
+            <div class="anim-text">Güvenli Ulaşım 🛡️</div>
+            <div class="anim-text">Konforlu Yolculuk ✨</div>
         </div>
 
         <div class="btn-area">
-            <a href="tel:05332153481" class="my-btn btn-call">
-                📞 HEMEN ARA
-                <span class="sub-txt">Tıkla ve Çağır</span>
-            </a>
-            <a href="https://wa.me/905332153481" class="my-btn btn-wp">
-                💬 WHATSAPP
-                <span class="sub-txt">Konum Gönder</span>
-            </a>
+            <a href="tel:05332153481" class="my-btn btn-call">📞 HEMEN ARA <small style="font-weight:normal">Tıkla ve Çağır</small></a>
+            <a href="https://wa.me/905332153481" class="my-btn btn-wp">💬 WHATSAPP <small style="font-weight:normal">Konum Gönder</small></a>
         </div>
     </section>
 
     <section class="about-section">
-        <div class="about-content">
-            <h2 style="color:var(--taxi-yellow); text-align:center;">Hakkımızda</h2>
-            <p>Malatya'da ulaşım ihtiyacınız olduğunda tek tuşla yanınızdayız. Dakikalar içinde kapınıza ulaşıyoruz.</p>
-            <ul class="service-list">
-                <li><b>🚖 Otogar Taksi:</b> Vaktinde ulaşım.</li>
-                <li><b>📍 Battalgazi & Yeşilyurt:</b> 7/24 hizmet.</li>
-                <li><b>✈️ Havalimanı Transfer:</b> VIP konfor.</li>
-                <li><b>🏥 Hastane Ulaşımı:</b> Hızlı erişim.</li>
-            </ul>
+        <div class="about-square">
+            <h2>Hakkımızda</h2>
+            <p style="font-size: 0.95rem;">Zeynal Ağca liderliğinde Malatya'nın her noktasına konforlu ve güvenilir ulaşım sağlıyoruz. Otogar, Havalimanı ve Şehir İçi transferlerinizde 7/24 yanınızdayız.</p>
+            <p style="font-weight: bold; margin-top: 10px;">Uygun Fiyat & Temiz Araç</p>
         </div>
     </section>
 
@@ -170,21 +147,18 @@
         <div class="privacy-text">
             <b>Gizlilik Politikası:</b> malatya-taksi.com olarak, müşterilerimizin gizliliğine önem veriyoruz. Sitemiz üzerinden bizimle iletişime geçtiğinizde paylaştığınız telefon numaraları, sadece ulaşım hizmeti sağlamak amacıyla kullanılır. Bilgileriniz üçüncü taraflarla paylaşılmaz ve KVKK kapsamında korunur.
         </div>
-        <p style="font-size: 11px; color: #444; margin-top: 20px;">© 2026 Zeynal Ağca - Tüm Hakları Saklıdır.</p>
+        <div style="margin-top: 15px; font-size: 11px; opacity: 0.6;">© 2026 Zeynal Ağca - Tüm Hakları Saklıdır.</div>
     </footer>
 
     <script>
-        (function() {
-            var g1 = document.querySelectorAll(".t-group1");
-            var i1 = 0;
-            function run() {
-                var n1 = (i1 + 1) % g1.length;
-                g1[i1].style.opacity = "0";
-                g1[n1].style.opacity = "1";
-                i1 = n1;
-            }
-            setInterval(run, 3000);
-        })();
+        const texts = document.querySelectorAll('.anim-text');
+        let index = 0;
+        setInterval(() => {
+            texts[index].classList.remove('active');
+            index = (index + 1) % texts.length;
+            texts[index].classList.add('active');
+        }, 3000);
     </script>
+
 </body>
 </html>
