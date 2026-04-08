@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malatya-Taksi Zeynal Ağca</title>
     <style>
+        /* 1. RENK VE PANEL AYARLARI */
         :root {
             --taxi-yellow: #ffca08;
             --taxi-orange: #ff8008;
             --whatsapp-green: #25d366;
-            --glass-white: rgba(255, 255, 255, 0.9);
+            --glass-white: rgba(255, 255, 255, 0.9); /* Aydınlık ve saydam */
+            --text-dark: #111;
         }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f4f4; color: #111; scroll-behavior: smooth;
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f0f0; color: var(--text-dark); scroll-behavior: smooth;
         }
 
-        /* AKAN NEON ÇİZGİ (Sarı -> Turuncu) */
+        /* 2. AKAN NEON ÇİZGİ (Yükleme Çubuğu Etkisi) */
         @keyframes loading-flow {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
@@ -28,92 +30,136 @@
             background: linear-gradient(90deg, var(--taxi-yellow), var(--taxi-orange), var(--taxi-yellow));
             background-size: 200% 100%;
             animation: loading-flow 2s linear infinite;
-            box-shadow: 0 0 15px rgba(255, 202, 8, 0.6);
+            box-shadow: 0 0 20px rgba(255, 202, 8, 0.6);
         }
 
-        header, footer {
+        /* 3. ÜST PANEL (BEYAZ SAYDAM) */
+        header {
             background: var(--glass-white);
             backdrop-filter: blur(15px);
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
-        header { position: sticky; top: 0; border-bottom: 1px solid #ddd; }
+        .logo { font-weight: 900; font-size: 1.3rem; letter-spacing: 1px; }
+        .logo span { color: var(--taxi-orange); }
 
-        /* ANA SAYFA (ARABA TAM GÖRÜNÜR) */
+        /* 4. ANA SAYFA (DEVASA BOYUT - HERO) */
         .hero {
-            position: relative; width: 100%; height: 85vh;
+            position: relative; width: 100%; 
+            height: 100vh; /* EKRANI TAM KAPLAR - DAHADA BÜYÜK */
             background: #000 url('ezgif.com-animated-gif-maker.gif') no-repeat center center;
-            background-size: contain; /* Fotoğrafın tamamını sığdırır */
+            background-size: cover; /* GIF'in tüm alanı dev gibi kaplamasını sağlar */
             display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
         }
 
-        .text-area { position: relative; height: 60px; width: 100%; display: flex; justify-content: center; align-items: center; }
+        /* GIF ÜZERİNDEKİ YAZI VE BUTONLAR */
+        .text-area { position: relative; height: 70px; width: 100%; display: flex; justify-content: center; align-items: center; }
         .anim-text {
-            position: absolute; font-size: 30px; font-weight: 900; color: #fff;
-            text-shadow: 0 4px 20px #000; opacity: 0; transition: 0.6s;
+            position: absolute; font-size: 35px; font-weight: 900; color: #fff;
+            text-shadow: 0 5px 25px rgba(0,0,0,1); opacity: 0; transition: 0.8s ease;
         }
         .anim-text.active { opacity: 1; }
 
-        .btn-group { display: flex; gap: 12px; margin-top: 30px; }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; z-index: 10; }
         .my-btn {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 180px; height: 80px; color: white; font-weight: bold; text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            width: 200px; height: 85px; color: white; font-weight: bold; text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.3s;
         }
-        .btn-call { background: linear-gradient(135deg, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; color: #000; }
-        .btn-wp { background: linear-gradient(135deg, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; }
+        .btn-call { background: linear-gradient(135deg, #FF8008, #FFA500); border-radius: 50px 10px 10px 50px; color: #000; }
+        .btn-wp { background: linear-gradient(135deg, #25d366, #128C7E); border-radius: 10px 50px 50px 10px; }
+        .my-btn:hover { transform: scale(1.05); }
 
-        /* HAKKINDA (ESKİ GENİŞ VE UZUN HALİ) */
+        /* 5. HAKKINDA (DAHADA AŞAĞIDA VE UZUN) */
+        .spacer { height: 150px; background: transparent; } /* Hakkında'yı aşağı itmek için boşluk */
+
         .about-wrap {
-            padding: 100px 5%;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('gece.webp') no-repeat center center;
+            padding: 150px 5%; /* DAHADA UZUN OLMASI İÇİN YÜKSEK PADDİNG */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('gece.webp') no-repeat center center;
             background-size: cover; background-attachment: fixed;
             display: flex; justify-content: center;
         }
         .about-content {
             background: var(--glass-white);
             backdrop-filter: blur(10px);
-            padding: 60px 40px; border-radius: 35px;
-            width: 100%; max-width: 1000px;
-            min-height: 700px;
+            padding: 60px; border-radius: 30px;
+            width: 100%; max-width: 1000px; /* Geniş ve ferah */
+            min-height: 500px; /* DAHA UZUN GÖRÜNMESİ İÇİN */
+            display: flex; flex-direction: column; justify-content: center;
             border: 2px solid var(--taxi-yellow);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .about-content h2 { color: var(--taxi-orange); font-size: 2.8rem; margin-bottom: 30px; text-align: center; }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .service-box { background: rgba(255, 202, 8, 0.1); padding: 20px; border-radius: 15px; border-left: 5px solid var(--taxi-yellow); font-size: 1.1rem; }
+
+        /* 6. ALT PANEL (BEYAZ SAYDAM) */
+        footer {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            padding: 50px 10%; text-align: center;
+        }
+        .privacy-text { font-size: 14px; line-height: 1.8; color: #444; max-width: 850px; margin: 0 auto; font-family: 'Arial', sans-serif; }
+
+        @media (max-width: 768px) {
+            .service-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; }
+            .anim-text { font-size: 24px; }
+            .about-content { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
     <div class="neon-bar"></div>
+
     <header>
-        <div style="font-weight:900;">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
-        <div style="color:var(--whatsapp-green); font-weight:bold;">● ŞU AN AKTİF</div>
+        <div class="logo">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
+        <div style="font-weight: 800; color: var(--whatsapp-green); font-size: 0.9rem;">● ŞU AN AKTİF</div>
     </header>
 
     <section class="hero">
         <div class="text-area">
-            <div class="anim-text active">Malatya VIP Taksi 🚖</div>
+            <div class="anim-text active">Malatya <span style="color:var(--taxi-yellow)">VIP</span> Taksi ✨</div>
             <div class="anim-text">Güvenli Ulaşım 🛡️</div>
-            <div class="anim-text">Zeynal Ağca Kapında ✨</div>
+            <div class="anim-text">7/24 Zeynal Ağca Kapında 🚖</div>
         </div>
+
         <div class="btn-group">
-            <a href="tel:05332153481" class="my-btn btn-call">📞 ARA</a>
-            <a href="https://wa.me/905332153481" class="my-btn btn-wp">💬 WHATSAPP</a>
+            <a href="tel:05332153481" class="my-btn btn-call">📞 HEMEN ARA <small style="font-weight:normal; font-size: 11px;">Tıkla ve Çağır</small></a>
+            <a href="https://wa.me/905332153481" class="my-btn btn-wp">💬 WHATSAPP <small style="font-weight:normal; font-size: 11px;">Konum Gönder</small></a>
         </div>
     </section>
 
     <div class="neon-bar"></div>
-    <div style="height:200px"></div>
+
+    <div class="spacer"></div>
 
     <section class="about-wrap">
         <div class="about-content">
-            <h2 style="text-align:center; color:var(--taxi-orange); font-size: 2.5rem;">Hakkımızda</h2>
-            <p style="font-size: 1.2rem; line-height: 1.8;">Malatya'da ulaşım ihtiyacınız olduğunda Malatya taksi numarasını aramanıza gerek kalmadan tek tuşla yanınızdayız. Hizmet Verdiğimiz Bölgeler: Otogar, Havalimanı, Battalgazi, Yeşilyurt, Hastaneler ve Şehirler Arası VIP transfer.</p>
+            <h2>Hakkımızda</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">Malatya'nın her noktasına <b>Zeynal Ağca</b> güvencesiyle, en konforlu ve en hızlı taksi hizmetini sunuyoruz.</p>
+            
+            <div class="service-grid">
+                <div class="service-box"><b>🚖 Otogar & Havalimanı:</b> Vaktinde karşılama ve ulaşım.</div>
+                <div class="service-box"><b>📍 Battalgazi & Yeşilyurt:</b> Tüm merkez bölgelerde 7/24 aktif.</div>
+                <div class="service-box"><b>🏥 Hastane Transfer:</b> Turgut Özal Tıp ve Devlet Hastanelerine hızlı erişim.</div>
+                <div class="service-box"><b>💎 VIP Konfor:</b> Temiz araçlar ve profesyonel sürüş deneyimi.</div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; font-weight: 900; color: var(--taxi-orange); font-size: 1.3rem;">Taksi Hattınız Bir Telefon Kadar Yakın!</p>
         </div>
     </section>
 
+    <div class="neon-bar"></div>
+
     <footer>
-        <p style="font-size: 13px; color: #555;">Gizlilik Politikası: Bilgileriniz KVKK kapsamında korunur.</p>
-        <p style="font-size: 11px; opacity: 0.5;">© 2026 Zeynal Ağca</p>
+        <div class="privacy-text">
+            <b>Gizlilik Politikası:</b> malatya-taksi.com olarak, müşterilerimizin gizliliğine önem veriyoruz. Sitemiz üzerinden bizimle iletişime geçtiğinizde paylaştığınız telefon numaraları, sadece ulaşım hizmeti sağlamak amacıyla kullanılır. Bilgileriniz üçüncü taraflarla paylaşılmaz ve KVKK kapsamında korunur.
+        </div>
+        <div style="margin-top: 20px; font-size: 11px; opacity: 0.5;">© 2026 Zeynal Ağca - Malatya'nın En Büyük VIP Hattı</div>
     </footer>
 
     <script>
@@ -125,5 +171,6 @@
             texts[index].classList.add('active');
         }, 3000);
     </script>
+
 </body>
 </html>
