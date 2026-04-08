@@ -10,112 +10,117 @@
             --taxi-yellow: #ffca08;
             --taxi-orange: #ff8008;
             --whatsapp-green: #25d366;
-            --bg-dark: #0a0a0a;
+            --panel-bg: rgba(20, 20, 25, 0.7); /* Saydam Şık Füme */
         }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-dark); color: white; scroll-behavior: smooth;
-            overflow-x: hidden;
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0a0a0a; color: white; scroll-behavior: smooth;
         }
 
-        /* 2. NEON ÇİZGİ ANİMASYONU (Sarı -> Turuncu) */
-        @keyframes neon-pulse {
-            0% {
-                border-color: var(--taxi-yellow);
-                box-shadow: 0 0 5px var(--taxi-yellow), 0 0 10px var(--taxi-yellow), 0 0 20px var(--taxi-yellow), 0 0 40px var(--taxi-yellow);
+        /* 2. NEON RENK GEÇİŞ ANİMASYONU (Sarı -> Turuncu) */
+        @keyframes neon-flow {
+            0% { 
+                border-color: var(--taxi-yellow); 
+                box-shadow: 0 0 8px var(--taxi-yellow), 0 0 15px var(--taxi-yellow); 
             }
-            50% {
-                border-color: var(--taxi-orange);
-                box-shadow: 0 0 5px var(--taxi-orange), 0 0 10px var(--taxi-orange), 0 0 20px var(--taxi-orange), 0 0 40px var(--taxi-orange);
+            50% { 
+                border-color: var(--taxi-orange); 
+                box-shadow: 0 0 10px var(--taxi-orange), 0 0 20px var(--taxi-orange); 
             }
-            100% {
-                border-color: var(--taxi-yellow);
-                box-shadow: 0 0 5px var(--taxi-yellow), 0 0 10px var(--taxi-yellow), 0 0 20px var(--taxi-yellow), 0 0 40px var(--taxi-yellow);
+            100% { 
+                border-color: var(--taxi-yellow); 
+                box-shadow: 0 0 8px var(--taxi-yellow), 0 0 15px var(--taxi-yellow); 
             }
         }
 
-        /* 3. HEADER (Sarı neon çizgi, siyah çizgi kaldırıldı, metin şeffaf GIF üzerinde) */
+        /* 3. ÜST PANEL (SAYDAM VE ŞIK) */
         header {
-            background-color: transparent; padding: 15px 5%; /* Siyah arka plan kaldırıldı */
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px); /* Cam efekti */
+            padding: 12px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 3px solid transparent; /* Neon animasyonunu buraya uygula */
-            animation: neon-pulse 3s infinite;
+            border-bottom: 3px solid var(--taxi-yellow);
+            animation: neon-flow 3s infinite ease-in-out;
             position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-weight: bold; font-size: 1.2rem; text-shadow: 2px 2px 10px #000; } /* GIF üzerinde okunabilirlik */
+        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
         .logo span { color: var(--taxi-yellow); }
+
+        /* CANLI DURUM ROZETİ (EKSRA) */
+        .status-badge {
+            display: flex; align-items: center; gap: 6px; font-size: 0.75rem;
+            background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px;
+            border: 1px solid var(--whatsapp-green);
+        }
+        .dot { width: 8px; height: 8px; background: var(--whatsapp-green); border-radius: 50%; animation: pulse-green 1.5s infinite; }
 
         /* 4. ANA SAYFA (GIF ARKA PLAN) */
         .hero {
-            position: relative; width: 100%; height: 85vh;
-            background: url('ezgif.com-animated-gif-maker.gif');
+            position: relative; width: 100%; height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('ezgif.com-animated-gif-maker.gif');
             background-size: cover; background-position: center;
-            display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; text-align: center;
-            margin-top: -75px; /* Header'ı GIF'in üzerine bindirmek için */
-            z-index: 1;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
         /* METİN DÖNGÜSÜ */
-        .text-area { position: relative; width: 100%; height: 60px; display: flex; justify-content: center; align-items: center; }
+        .text-area { position: relative; width: 100%; height: 50px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
         .anim-text {
-            position: absolute; width: 100%; font-size: 26px; font-weight: 800;
-            color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-            opacity: 0; transition: opacity 0.5s ease-in-out;
+            position: absolute; font-size: 24px; font-weight: 900;
+            color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,1);
+            opacity: 0; transition: 0.5s ease-in-out;
         }
-        .c-gold { color: #FFD700; }
-        .c-green { color: #00ff88; }
+        .c-gold { color: var(--taxi-yellow); }
 
         /* 5. NABIZ ATAN BUTONLAR */
-        .btn-area { display: flex; justify-content: center; align-items: center; gap: 8px; z-index: 100; margin: 20px 0; }
+        .btn-area { display: flex; justify-content: center; gap: 10px; z-index: 100; }
         .my-btn {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            width: 180px; height: 75px; color: white; font-weight: bold;
-            text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.1s; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 170px; height: 70px; color: white; font-weight: bold; text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.2s;
         }
-        .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; animation: pulse-orange 2s infinite; }
-        .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; animation: pulse-green 2s infinite; animation-delay: 1s; }
-        .sub-txt { font-size: 11px; font-weight: normal; margin-top: 3px; opacity: 0.9; }
+        .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 30px 5px 5px 30px; animation: pulse-orange 2s infinite; color: #000; }
+        .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 5px 30px 30px 5px; animation: pulse-green 2s infinite; animation-delay: 1s; }
+        .my-btn:active { transform: scale(0.9); }
+        .sub-txt { font-size: 10px; font-weight: normal; margin-top: 2px; }
 
-        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 165, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); } }
+        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 128, 8, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 128, 8, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 128, 8, 0); } }
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* 6. HAKKINDA BÖLÜMÜ (SAYDAM TEMA, NEON ÇİZGİ) */
+        /* 6. HAKKINDA BÖLÜMÜ (SAYDAM TEMA) */
         .about-section {
-            width: 100%; min-height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('gece.webp');
+            padding: 80px 5%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('gece.webp');
             background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; justify-content: center; align-items: center; padding: 60px 0;
-            border-top: 3px solid transparent; /* Neon animasyonunu buraya uygula */
-            animation: neon-pulse 3s infinite;
+            display: flex; justify-content: center;
+            border-top: 3px solid var(--taxi-yellow);
+            animation: neon-flow 3s infinite ease-in-out;
         }
         .about-content {
-            background: rgba(30, 30, 30, 0.5); /* Siyah yerine koyu gri, daha saydam */
-            padding: 40px; margin: 20px; border-radius: 25px;
-            max-width: 850px; text-align: left;
-            backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            background: rgba(15, 15, 20, 0.6);
+            padding: 35px; border-radius: 20px; max-width: 800px;
+            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1);
         }
-        .about-content h2 { color: var(--taxi-yellow); font-size: 2.2rem; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .about-content p { line-height: 1.8; color: #eee; font-size: 1.05rem; margin-bottom: 20px; }
-        .service-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .service-list li { background: rgba(255, 202, 8, 0.1); padding: 10px; border-radius: 10px; border-left: 3px solid var(--taxi-yellow); }
+        .service-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .service-list li { background: rgba(255, 202, 8, 0.1); padding: 8px; border-radius: 8px; border-left: 3px solid var(--taxi-yellow); font-size: 0.95rem; }
 
-        /* 7. ÖZELLİKLER */
-        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; 
-            border-top: 3px solid transparent; animation: neon-pulse 3s infinite; /* Features'ın üst çizgisini de neon yap */
+        /* 7. GİZLİLİK POLİTİKASI (ALT KISIM) */
+        footer {
+            background: #050505; padding: 40px 10%;
+            border-top: 3px solid var(--taxi-yellow);
+            animation: neon-flow 3s infinite ease-in-out;
+            text-align: center;
         }
-        .f-item { text-align: center; flex: 1; min-width: 200px; padding: 10px; font-weight: bold; color: var(--taxi-yellow); }
+        .privacy-text {
+            font-size: 13px; color: #777; line-height: 1.6; max-width: 700px; margin: 0 auto;
+            font-family: 'Arial', sans-serif; /* Daha sade punto için */
+        }
+        .privacy-text b { color: #aaa; }
 
         @media (max-width: 600px) {
-            .btn-area { flex-direction: column; gap: 15px; }
-            .my-btn { width: 85%; border-radius: 30px; }
             .service-list { grid-template-columns: 1fr; }
-            .about-content { padding: 25px; }
-            .logo { font-size: 1rem; }
-            .hero { margin-top: -65px; height: auto; padding: 100px 0 60px 0; }
+            .btn-area { flex-direction: column; align-items: center; }
+            .my-btn { width: 80%; border-radius: 25px; }
         }
     </style>
 </head>
@@ -123,13 +128,17 @@
 
     <header>
         <div class="logo">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
+        <div class="status-badge">
+            <div class="dot"></div>
+            Şu An Aktif
+        </div>
     </header>
 
     <section class="hero">
         <div id="top-area" class="text-area">
             <div class="anim-text t-group1" style="opacity: 1;">Malatya <span class="c-gold">VIP</span> Taksi 🚖</div>
-            <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Kapında ✨</div>
-            <div class="anim-text t-group1">7/24 <span class="c-green">Güvenli</span> Yolculuk 🛡️</div>
+            <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Hizmetinizde ✨</div>
+            <div class="anim-text t-group1">7/24 <span class="c-gold">Güvenli</span> Ulaşım 🛡️</div>
         </div>
 
         <div class="btn-area">
@@ -142,61 +151,40 @@
                 <span class="sub-txt">Konum Gönder</span>
             </a>
         </div>
-
-        <div id="bottom-area" class="text-area">
-            <div class="anim-text t-group3" style="opacity: 1;">Havalimanı <span class="c-gold">VIP</span> Transfer</div>
-            <div class="anim-text t-group3">7/24 <span class="c-green">Kesintisiz</span> Ulaşım</div>
-            <div class="anim-text t-group3">Uygun Fiyat <span class="c-gold">Kaliteli</span> Hizmet</div>
-        </div>
     </section>
 
     <section class="about-section">
         <div class="about-content">
-            <h2>Hakkımızda</h2>
-            <p>Malatya'da ulaşım ihtiyacınız olduğunda <b>Malatya taksi numarasını</b> aramanıza gerek kalmadan tek tuşla yanınızdayız. En yakın taksi hizmet anlayışımızla, dakikalar içinde kapınıza ulaşıyoruz.</p>
-            
+            <h2 style="color:var(--taxi-yellow); text-align:center;">Hakkımızda</h2>
+            <p>Malatya'da ulaşım ihtiyacınız olduğunda tek tuşla yanınızdayız. Dakikalar içinde kapınıza ulaşıyoruz.</p>
             <ul class="service-list">
-                <li><b>🚖 Otogar Taksi:</b> Otogara vaktinde yetişin veya sizi karşılayalım.</li>
-                <li><b>📍 Battalgazi & Yeşilyurt:</b> Merkez ilçelerde 7/24 nöbetçi taksi.</li>
-                <li><b>✈️ Havalimanı Transfer:</b> Erhaç Havalimanı'na konforlu ulaşım.</li>
-                <li><b>🏥 Hastane Ulaşımı:</b> Turgut Özal Tıp ve Eğitim Araştırma noktalarına hızlı erişim.</li>
-                <li><b>🏢 Şehir İçi & Dışı:</b> Güvenilir ve konforlu uzun-kısa mesafe yolculuk.</li>
-                <li><b>💎 VIP Hizmet:</b> Temiz araç, uygun fiyat ve profesyonel sürüş.</li>
+                <li><b>🚖 Otogar Taksi:</b> Vaktinde ulaşım.</li>
+                <li><b>📍 Battalgazi & Yeşilyurt:</b> 7/24 hizmet.</li>
+                <li><b>✈️ Havalimanı Transfer:</b> VIP konfor.</li>
+                <li><b>🏥 Hastane Ulaşımı:</b> Hızlı erişim.</li>
             </ul>
-
-            <p style="text-align: center; margin-top: 25px; font-weight: bold; color: var(--taxi-yellow);">
-                Zeynal Ağca Güvencesiyle, Taksi Hattınız Bir Telefon Kadar Yakın!
-            </p>
         </div>
     </section>
 
-    <section class="features">
-        <div class="f-item">✨ VIP KONFOR</div>
-        <div class="f-item">💰 UYGUN FİYAT</div>
-        <div class="f-item">⏱️ TAM ZAMANINDA</div>
-    </section>
+    <footer>
+        <div class="privacy-text">
+            <b>Gizlilik Politikası:</b> malatya-taksi.com olarak, müşterilerimizin gizliliğine önem veriyoruz. Sitemiz üzerinden bizimle iletişime geçtiğinizde paylaştığınız telefon numaraları, sadece ulaşım hizmeti sağlamak amacıyla kullanılır. Bilgileriniz üçüncü taraflarla paylaşılmaz ve KVKK kapsamında korunur.
+        </div>
+        <p style="font-size: 11px; color: #444; margin-top: 20px;">© 2026 Zeynal Ağca - Tüm Hakları Saklıdır.</p>
+    </footer>
 
     <script>
         (function() {
             var g1 = document.querySelectorAll(".t-group1");
             var i1 = 0;
-            var g3 = document.querySelectorAll(".t-group3");
-            var i3 = 0;
-
             function run() {
                 var n1 = (i1 + 1) % g1.length;
                 g1[i1].style.opacity = "0";
                 g1[n1].style.opacity = "1";
                 i1 = n1;
-
-                var n3 = (i3 + 1) % g3.length;
-                g3[i3].style.opacity = "0";
-                g3[n3].style.opacity = "1";
-                i3 = n3;
             }
-            setInterval(run, 2800);
+            setInterval(run, 3000);
         })();
     </script>
-
 </body>
 </html>
