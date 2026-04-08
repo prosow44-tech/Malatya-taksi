@@ -8,6 +8,7 @@
         /* 1. TEMEL AYARLAR */
         :root {
             --taxi-yellow: #ffca08;
+            --taxi-orange: #ff8008;
             --whatsapp-green: #25d366;
             --bg-dark: #0a0a0a;
         }
@@ -18,23 +19,42 @@
             overflow-x: hidden;
         }
 
-        /* 2. HEADER */
-        header {
-            background-color: #1a1a1a; padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--taxi-yellow); position: sticky; top: 0; z-index: 1000;
+        /* 2. NEON ÇİZGİ ANİMASYONU (Sarı -> Turuncu) */
+        @keyframes neon-pulse {
+            0% {
+                border-color: var(--taxi-yellow);
+                box-shadow: 0 0 5px var(--taxi-yellow), 0 0 10px var(--taxi-yellow), 0 0 20px var(--taxi-yellow), 0 0 40px var(--taxi-yellow);
+            }
+            50% {
+                border-color: var(--taxi-orange);
+                box-shadow: 0 0 5px var(--taxi-orange), 0 0 10px var(--taxi-orange), 0 0 20px var(--taxi-orange), 0 0 40px var(--taxi-orange);
+            }
+            100% {
+                border-color: var(--taxi-yellow);
+                box-shadow: 0 0 5px var(--taxi-yellow), 0 0 10px var(--taxi-yellow), 0 0 20px var(--taxi-yellow), 0 0 40px var(--taxi-yellow);
+            }
         }
-        .logo { font-weight: bold; font-size: 1.2rem; }
+
+        /* 3. HEADER (Sarı neon çizgi, siyah çizgi kaldırıldı, metin şeffaf GIF üzerinde) */
+        header {
+            background-color: transparent; padding: 15px 5%; /* Siyah arka plan kaldırıldı */
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 3px solid transparent; /* Neon animasyonunu buraya uygula */
+            animation: neon-pulse 3s infinite;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-weight: bold; font-size: 1.2rem; text-shadow: 2px 2px 10px #000; } /* GIF üzerinde okunabilirlik */
         .logo span { color: var(--taxi-yellow); }
 
-        /* 3. ANA SAYFA (GIF ARKA PLAN) */
+        /* 4. ANA SAYFA (GIF ARKA PLAN) */
         .hero {
             position: relative; width: 100%; height: 85vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('ezgif.com-animated-gif-maker.gif');
+            background: url('ezgif.com-animated-gif-maker.gif');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center;
+            margin-top: -75px; /* Header'ı GIF'in üzerine bindirmek için */
+            z-index: 1;
         }
 
         /* METİN DÖNGÜSÜ */
@@ -47,7 +67,7 @@
         .c-gold { color: #FFD700; }
         .c-green { color: #00ff88; }
 
-        /* 4. NABIZ ATAN BUTONLAR */
+        /* 5. NABIZ ATAN BUTONLAR */
         .btn-area { display: flex; justify-content: center; align-items: center; gap: 8px; z-index: 100; margin: 20px 0; }
         .my-btn {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -62,16 +82,17 @@
         @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 165, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); } }
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* 5. HAKKINDA BÖLÜMÜ (ZEYNAL AĞCA METNİ) */
+        /* 6. HAKKINDA BÖLÜMÜ (SAYDAM TEMA, NEON ÇİZGİ) */
         .about-section {
             width: 100%; min-height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('gece.webp');
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; justify-content: center; align-items: center; padding: 60px 0;
-            border-top: 3px solid var(--taxi-yellow);
+            border-top: 3px solid transparent; /* Neon animasyonunu buraya uygula */
+            animation: neon-pulse 3s infinite;
         }
         .about-content {
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(30, 30, 30, 0.5); /* Siyah yerine koyu gri, daha saydam */
             padding: 40px; margin: 20px; border-radius: 25px;
             max-width: 850px; text-align: left;
             backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -82,8 +103,10 @@
         .service-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .service-list li { background: rgba(255, 202, 8, 0.1); padding: 10px; border-radius: 10px; border-left: 3px solid var(--taxi-yellow); }
 
-        /* 6. ÖZELLİKLER */
-        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; border-top: 1px solid #222; }
+        /* 7. ÖZELLİKLER */
+        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; 
+            border-top: 3px solid transparent; animation: neon-pulse 3s infinite; /* Features'ın üst çizgisini de neon yap */
+        }
         .f-item { text-align: center; flex: 1; min-width: 200px; padding: 10px; font-weight: bold; color: var(--taxi-yellow); }
 
         @media (max-width: 600px) {
@@ -91,6 +114,8 @@
             .my-btn { width: 85%; border-radius: 30px; }
             .service-list { grid-template-columns: 1fr; }
             .about-content { padding: 25px; }
+            .logo { font-size: 1rem; }
+            .hero { margin-top: -65px; height: auto; padding: 100px 0 60px 0; }
         }
     </style>
 </head>
