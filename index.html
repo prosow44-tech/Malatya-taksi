@@ -1,11 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>SİSTEM TESTİ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malatya-Taksi Zeynal Ağca</title>
+    <style>
+        :root {
+            --taxi-yellow: #ffca08;
+            --taxi-orange: #ff8008;
+            --whatsapp-green: #25d366;
+            --glass-white: rgba(255, 255, 255, 0.9);
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4; color: #111; scroll-behavior: smooth;
+        }
+
+        /* AKAN NEON ÇİZGİ (Sarı -> Turuncu) */
+        @keyframes loading-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .neon-bar {
+            height: 6px; width: 100%;
+            background: linear-gradient(90deg, var(--taxi-yellow), var(--taxi-orange), var(--taxi-yellow));
+            background-size: 200% 100%;
+            animation: loading-flow 2s linear infinite;
+            box-shadow: 0 0 15px rgba(255, 202, 8, 0.6);
+        }
+
+        header, footer {
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        header { position: sticky; top: 0; border-bottom: 1px solid #ddd; }
+
+        /* ANA SAYFA (ARABA TAM GÖRÜNÜR) */
+        .hero {
+            position: relative; width: 100%; height: 85vh;
+            background: #000 url('ezgif.com-animated-gif-maker.gif') no-repeat center center;
+            background-size: contain; /* Fotoğrafın tamamını sığdırır */
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        .text-area { position: relative; height: 60px; width: 100%; display: flex; justify-content: center; align-items: center; }
+        .anim-text {
+            position: absolute; font-size: 30px; font-weight: 900; color: #fff;
+            text-shadow: 0 4px 20px #000; opacity: 0; transition: 0.6s;
+        }
+        .anim-text.active { opacity: 1; }
+
+        .btn-group { display: flex; gap: 12px; margin-top: 30px; }
+        .my-btn {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 180px; height: 80px; color: white; font-weight: bold; text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .btn-call { background: linear-gradient(135deg, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; color: #000; }
+        .btn-wp { background: linear-gradient(135deg, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; }
+
+        /* HAKKINDA (ESKİ GENİŞ VE UZUN HALİ) */
+        .about-wrap {
+            padding: 100px 5%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('gece.webp') no-repeat center center;
+            background-size: cover; background-attachment: fixed;
+            display: flex; justify-content: center;
+        }
+        .about-content {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px; border-radius: 35px;
+            width: 100%; max-width: 1000px;
+            min-height: 700px;
+            border: 2px solid var(--taxi-yellow);
+        }
+    </style>
 </head>
-<body style="background: red; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;">
-    <h1 style="font-size: 50px;">TEST BAŞARILI!</h1>
-    <p style="font-size: 24px;">Zeynal, eğer bu kırmızı ekranı görüyorsan bağlantı sağlamdır.</p>
-    <p>Şimdi asıl kodu tekrar yükleyebiliriz.</p>
+<body>
+
+    <div class="neon-bar"></div>
+    <header>
+        <div style="font-weight:900;">🚖 Malatya-Taksi <span>Zeynal Ağca</span></div>
+        <div style="color:var(--whatsapp-green); font-weight:bold;">● ŞU AN AKTİF</div>
+    </header>
+
+    <section class="hero">
+        <div class="text-area">
+            <div class="anim-text active">Malatya VIP Taksi 🚖</div>
+            <div class="anim-text">Güvenli Ulaşım 🛡️</div>
+            <div class="anim-text">Zeynal Ağca Kapında ✨</div>
+        </div>
+        <div class="btn-group">
+            <a href="tel:05332153481" class="my-btn btn-call">📞 ARA</a>
+            <a href="https://wa.me/905332153481" class="my-btn btn-wp">💬 WHATSAPP</a>
+        </div>
+    </section>
+
+    <div class="neon-bar"></div>
+    <div style="height:200px"></div>
+
+    <section class="about-wrap">
+        <div class="about-content">
+            <h2 style="text-align:center; color:var(--taxi-orange); font-size: 2.5rem;">Hakkımızda</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8;">Malatya'da ulaşım ihtiyacınız olduğunda Malatya taksi numarasını aramanıza gerek kalmadan tek tuşla yanınızdayız. Hizmet Verdiğimiz Bölgeler: Otogar, Havalimanı, Battalgazi, Yeşilyurt, Hastaneler ve Şehirler Arası VIP transfer.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-size: 13px; color: #555;">Gizlilik Politikası: Bilgileriniz KVKK kapsamında korunur.</p>
+        <p style="font-size: 11px; opacity: 0.5;">© 2026 Zeynal Ağca</p>
+    </footer>
+
+    <script>
+        const texts = document.querySelectorAll('.anim-text');
+        let index = 0;
+        setInterval(() => {
+            texts[index].classList.remove('active');
+            index = (index + 1) % texts.length;
+            texts[index].classList.add('active');
+        }, 3000);
+    </script>
 </body>
 </html>
