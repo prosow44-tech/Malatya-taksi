@@ -30,7 +30,7 @@
         /* 3. ANA SAYFA (GIF ARKA PLAN) */
         .hero {
             position: relative; width: 100%; height: 85vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('ezgif.com-animated-gif-maker.gif');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; 
@@ -62,35 +62,35 @@
         @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 165, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); } }
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* 5. HAKKINDA BÖLÜMÜ (GECE.WEBP BOYUTUNA GÖRE) */
+        /* 5. HAKKINDA BÖLÜMÜ (ZEYNAL AĞCA METNİ) */
         .about-section {
-            width: 100%;
-            min-height: 100vh; /* Görsel büyüklüğüne göre tam ekran veya daha fazla kaplar */
-            background: url('gece.webp') no-repeat center center;
-            background-size: cover;
-            display: flex; justify-content: center; align-items: center;
+            width: 100%; min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('gece.webp');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; justify-content: center; align-items: center; padding: 60px 0;
             border-top: 3px solid var(--taxi-yellow);
         }
         .about-content {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 40px;
-            margin: 20px;
-            border-radius: 20px;
-            max-width: 700px;
-            text-align: center;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.75);
+            padding: 40px; margin: 20px; border-radius: 25px;
+            max-width: 850px; text-align: left;
+            backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        .about-content h2 { color: var(--taxi-yellow); font-size: 2.2rem; margin-bottom: 15px; }
+        .about-content h2 { color: var(--taxi-yellow); font-size: 2.2rem; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .about-content p { line-height: 1.8; color: #eee; font-size: 1.05rem; margin-bottom: 20px; }
+        .service-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .service-list li { background: rgba(255, 202, 8, 0.1); padding: 10px; border-radius: 10px; border-left: 3px solid var(--taxi-yellow); }
 
-        /* ÖZELLİKLER */
-        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; }
-        .f-item { text-align: center; flex: 1; min-width: 200px; padding: 10px; }
+        /* 6. ÖZELLİKLER */
+        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; border-top: 1px solid #222; }
+        .f-item { text-align: center; flex: 1; min-width: 200px; padding: 10px; font-weight: bold; color: var(--taxi-yellow); }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .btn-area { flex-direction: column; gap: 15px; }
-            .my-btn { width: 80%; border-radius: 30px; }
-            .hero { height: auto; padding: 60px 0; }
+            .my-btn { width: 85%; border-radius: 30px; }
+            .service-list { grid-template-columns: 1fr; }
+            .about-content { padding: 25px; }
         }
     </style>
 </head>
@@ -103,7 +103,7 @@
     <section class="hero">
         <div id="top-area" class="text-area">
             <div class="anim-text t-group1" style="opacity: 1;">Malatya <span class="c-gold">VIP</span> Taksi 🚖</div>
-            <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Güvencesiyle ✨</div>
+            <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Kapında ✨</div>
             <div class="anim-text t-group1">7/24 <span class="c-green">Güvenli</span> Yolculuk 🛡️</div>
         </div>
 
@@ -128,14 +128,27 @@
     <section class="about-section">
         <div class="about-content">
             <h2>Hakkımızda</h2>
-            <p>Zeynal Ağca liderliğinde Malatya'nın her noktasına konforlu, hızlı ve güvenilir ulaşım sağlıyoruz. Müşteri memnuniyetini ön planda tutan hizmet anlayışımızla şehir içi ve VIP transferlerinizde yanınızdayız.</p>
+            <p>Malatya'da ulaşım ihtiyacınız olduğunda <b>Malatya taksi numarasını</b> aramanıza gerek kalmadan tek tuşla yanınızdayız. En yakın taksi hizmet anlayışımızla, dakikalar içinde kapınıza ulaşıyoruz.</p>
+            
+            <ul class="service-list">
+                <li><b>🚖 Otogar Taksi:</b> Otogara vaktinde yetişin veya sizi karşılayalım.</li>
+                <li><b>📍 Battalgazi & Yeşilyurt:</b> Merkez ilçelerde 7/24 nöbetçi taksi.</li>
+                <li><b>✈️ Havalimanı Transfer:</b> Erhaç Havalimanı'na konforlu ulaşım.</li>
+                <li><b>🏥 Hastane Ulaşımı:</b> Turgut Özal Tıp ve Eğitim Araştırma noktalarına hızlı erişim.</li>
+                <li><b>🏢 Şehir İçi & Dışı:</b> Güvenilir ve konforlu uzun-kısa mesafe yolculuk.</li>
+                <li><b>💎 VIP Hizmet:</b> Temiz araç, uygun fiyat ve profesyonel sürüş.</li>
+            </ul>
+
+            <p style="text-align: center; margin-top: 25px; font-weight: bold; color: var(--taxi-yellow);">
+                Zeynal Ağca Güvencesiyle, Taksi Hattınız Bir Telefon Kadar Yakın!
+            </p>
         </div>
     </section>
 
     <section class="features">
-        <div class="f-item"><b>✨ VIP KONFOR</b></div>
-        <div class="f-item"><b>💰 UYGUN FİYAT</b></div>
-        <div class="f-item"><b>⏱️ TAM ZAMANINDA</b></div>
+        <div class="f-item">✨ VIP KONFOR</div>
+        <div class="f-item">💰 UYGUN FİYAT</div>
+        <div class="f-item">⏱️ TAM ZAMANINDA</div>
     </section>
 
     <script>
@@ -156,7 +169,7 @@
                 g3[n3].style.opacity = "1";
                 i3 = n3;
             }
-            setInterval(run, 2500);
+            setInterval(run, 2800);
         })();
     </script>
 
