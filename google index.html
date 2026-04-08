@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taksi Malatya - Ramazan Kılıç</title>
+    <style>
+        /* TEMEL AYARLAR */
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000; color: white;
+        }
+
+        /* ÜST MENÜ (HEADER) */
+        header {
+            background-color: #1a1a1a;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .logo { font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: #ffc107; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.9rem; opacity: 0.8; }
+
+        /* ANA GÖRSEL ALANI (HERO) */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('gece.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* YAZILAR */
+        .main-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        .main-title span { color: #25d366; } /* Güvenli kelimesi yeşil */
+
+        .sub-title { font-size: 1.4rem; font-weight: bold; margin-top: 20px; }
+        .sub-title span { color: #ffc107; } /* VIP kelimesi sarı */
+
+        /* BUTONLAR */
+        .btn-group { display: flex; gap: 15px; width: 90%; max-width: 500px; justify-content: center; }
+
+        .btn {
+            flex: 1;
+            padding: 12px 5px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .btn-call { background: linear-gradient(to bottom, #ff9800, #f57c00); }
+        .btn-whatsapp { background: linear-gradient(to bottom, #25d366, #128c7e); }
+
+        .btn-text { font-size: 1.1rem; }
+        .btn-subtext { font-size: 0.7rem; font-weight: normal; opacity: 0.9; margin-top: 2px; }
+
+        /* MOBİL UYUM */
+        @media (max-width: 480px) {
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; }
+            .main-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🚖 Taksi <span>Malatya</span> - Ramazan Kılıç</div>
+        <nav>
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Hakkında</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="main-title">7/24 <span>Güvenli</span> Yolculuk 🛡️</div>
+
+        <div class="btn-group">
+            <a href="tel:05332153481" class="btn btn-call">
+                <span class="btn-text">📞 HEMEN ARA</span>
+                <span class="btn-subtext">Tıkla ve Çağır</span>
+            </a>
+
+            <a href="https://wa.me/905332153481" class="btn btn-whatsapp">
+                <span class="btn-text">💬 WHATSAPP</span>
+                <span class="btn-subtext">Konum Gönder</span>
+            </a>
+        </div>
+
+        <div class="sub-title">Havalimanı <span>VIP</span> Transfer</div>
+    </div>
+
+</body>
+</html>
