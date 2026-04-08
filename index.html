@@ -3,207 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malatya Taksi - Final Panel</title>
+    <title>Taksi Malatya - Ramazan Kılıç</title>
     <style>
         /* 1. TEMEL AYARLAR */
         :root {
-            --taxi-yellow: #FFC107;
-            --whatsapp-green: #25D366;
-            --text-white: #ffffff;
+            --taxi-yellow: #ffca08;
+            --whatsapp-green: #25d366;
+            --bg-dark: #0a0a0a;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: transparent;
-            margin: 0;
-            padding: 10px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            -webkit-font-smoothing: antialiased;
+        body, html {
+            margin: 0; padding: 0; width: 100%; font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark); color: white; scroll-behavior: smooth;
         }
 
-        /* 2. YAZI ALANLARI (Yükseklik arttırıldı çünkü emoji alta indi) */
-        .text-wrapper {
-            position: relative;
-            width: 100%;
-            height: 90px; /* Emoji alta indiği için burayı genişlettik */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 5px;
+        /* 2. ÜST MENÜ */
+        header {
+            background-color: #1a1a1a; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--taxi-yellow); position: sticky; top: 0; z-index: 1000;
         }
 
-        .text-wrapper.bottom {
-            margin-top: 20px;
-            height: 45px; /* Alt kısım tek satır, kısa kalsın */
+        .logo { font-weight: bold; font-size: 1.2rem; }
+        .logo span { color: var(--taxi-yellow); }
+
+        /* 3. ANA GÖRSEL ALANI (GIPHY ARKA PLAN) */
+        .hero {
+            position: relative; width: 100%; height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://media3.giphy.com/media/8vOF7lHxRwAMdpiqB5/giphy.gif');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
 
-        /* 3. NEONLU YAZILAR */
-        .animated-text {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--text-white);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9); /* Okunabilirlik gölgesi */
-            will-change: opacity, transform;
-            line-height: 1.3;
+        .main-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; text-shadow: 2px 2px 15px rgba(0,0,0,1); }
+        .main-title span { color: var(--whatsapp-green); }
+
+        /* 4. BUTONLAR */
+        .btn-group { display: flex; gap: 15px; width: 90%; max-width: 500px; }
+
+        .btn {
+            flex: 1; padding: 15px 5px; border-radius: 15px; text-decoration: none; color: white;
+            display: flex; flex-direction: column; align-items: center; font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: transform 0.2s;
         }
 
-        .animated-text.active {
-            opacity: 1;
-            transform: translateY(0);
+        .btn-call { background: linear-gradient(135deg, #ff9800, #f57c00); color: #000; }
+        .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .btn:active { transform: scale(0.95); }
+
+        .btn-main { font-size: 1.1rem; }
+        .btn-sub { font-size: 0.7rem; font-weight: normal; opacity: 0.9; }
+
+        .sub-title { font-size: 1.4rem; font-weight: bold; margin-top: 25px; }
+        .sub-title span { color: var(--taxi-yellow); }
+
+        /* 5. ÖZELLİKLER BÖLÜMÜ (İKONLAR) */
+        .features-container {
+            display: flex; justify-content: space-around; flex-wrap: wrap;
+            padding: 50px 5%; background-color: #111; gap: 30px;
         }
 
-        /* EMOJİ AYARI (Alta inmesi için) */
-        .emoji-row {
-            display: block; /* Alt satıra atar */
-            font-size: 32px; /* Emojiyi biraz büyüttük */
-            margin-top: 5px; /* Yazı ile arası */
+        .feature-item { 
+            display: flex; flex-direction: column; align-items: center; 
+            text-align: center; transition: transform 0.3s ease; flex: 1; min-width: 250px;
         }
 
-        /* 🔥 NEON PARLAMA EFEKTİ 🔥 */
-        .highlight { 
-            color: var(--taxi-yellow); 
-            text-transform: uppercase;
-            text-shadow: 
-                0 0 5px rgba(255, 193, 7, 0.8),
-                0 0 15px rgba(255, 193, 7, 0.5),
-                0 0 25px rgba(255, 193, 7, 0.3);
+        .feature-item:hover { transform: translateY(-10px); }
+
+        .icon-circle { 
+            width: 90px; height: 90px; background-color: var(--taxi-yellow); 
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            font-size: 40px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+            border: 3px solid white; color: #000;
         }
 
-        /* 4. BUTON GRUBU (DİKEY) */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .action-btn {
-            width: 85%;
-            max-width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 0;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            font-size: 20px;
-            transition: transform 0.1s;
-            border: none;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .action-btn:active { transform: scale(0.96); }
-
-        /* ARAMA BUTONU */
-        .btn-call {
-            background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
-            color: #000;
-            animation: pulse-yellow 2s infinite;
-        }
-
-        /* WHATSAPP BUTONU */
-        .btn-wp {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            animation: pulse-green 2s infinite;
-            animation-delay: 1s; 
-        }
-
-        .btn-sub {
-            font-size: 13px;
-            font-weight: normal;
-            margin-top: 5px;
-            opacity: 0.9;
-        }
-
-        /* 5. ANİMASYONLAR */
-        @keyframes pulse-yellow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(255, 193, 7, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+        .f-title { font-weight: 800; font-size: 19px; color: var(--taxi-yellow); text-transform: uppercase; }
+        .f-subtitle { font-size: 14px; color: #ccc; margin-top: 5px; }
 
         /* MOBİL UYUM */
-        @media (max-width: 350px) {
-            .animated-text { font-size: 22px; }
-            .emoji-row { font-size: 28px; }
-            .action-btn { font-size: 18px; }
+        @media (max-width: 600px) {
+            .btn-group { flex-direction: column; }
+            .hero { height: auto; padding: 80px 0; }
+            .main-title { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="text-wrapper">
-        <div class="animated-text group-1 active">
-            Malatya <span class="highlight">Taksi</span> Hizmeti
-            <span class="emoji-row">🚖</span>
+    <header>
+        <div class="logo">🚖 Taksi <span>Malatya</span> - Ramazan Kılıç</div>
+    </header>
+
+    <section class="hero">
+        <div class="main-title">7/24 <span>Güvenli</span> Yolculuk 🛡️</div>
+
+        <div class="btn-group">
+            <a href="tel:05332153481" class="btn btn-call">
+                <span class="btn-main">📞 HEMEN ARA</span>
+                <span class="btn-sub">Tıkla ve Çağır</span>
+            </a>
+
+            <a href="https://wa.me/905332153481" class="btn btn-whatsapp">
+                <span class="btn-main">💬 WHATSAPP</span>
+                <span class="btn-sub">Konum Gönder</span>
+            </a>
         </div>
-        <div class="animated-text group-1">
-            En <span class="highlight">Uygun</span> Fiyatlar
-            <span class="emoji-row">🚕</span>
+
+        <div class="sub-title">Havalimanı <span>VIP</span> Transfer</div>
+    </section>
+
+    <section class="features-container">
+        <div class="feature-item">
+            <div class="icon-circle">✨</div>
+            <div class="f-title">VIP & KONFORLU</div>
+            <div class="f-subtitle">Temiz ve yüksek modelli araçlar</div>
         </div>
-        <div class="animated-text group-1">
-            7/24 <span class="highlight">Acil</span> Ulaşım
-            <span class="emoji-row">⚡</span>
+
+        <div class="feature-item">
+            <div class="icon-circle">💰</div>
+            <div class="f-title">UYGUN FİYAT</div>
+            <div class="f-subtitle">Ekonomik tarifeler, kaliteli ulaşım</div>
         </div>
-    </div>
 
-    <div class="btn-container">
-        <a href="tel:05332153481" class="action-btn btn-call">
-            📞 HEMEN ARA
-            <span class="btn-sub">Taksi Kapında!</span>
-        </a>
-
-        <a href="https://wa.me/905332153481?text=Merhaba,%20taksi%20çağırmak%20istiyorum." class="action-btn btn-wp" target="_blank">
-            💬 WHATSAPP
-            <span class="btn-sub">Konum Gönder</span>
-        </a>
-    </div>
-
-    <div class="text-wrapper bottom">
-        <div class="animated-text group-2 active">Devlet <span class="highlight">Hastanesi</span></div>
-        <div class="animated-text group-2"><span class="highlight">Malatya</span> Park AVM</div>
-        <div class="animated-text group-2">Şehirler Arası <span class="highlight">Transfer</span></div>
-        <div class="animated-text group-2">Havalimanı <span class="highlight">Taksi</span></div>
-        <div class="animated-text group-2">Otogar <span class="highlight">Taksi</span></div>
-        <div class="animated-text group-2"><span class="highlight">Battalgazi</span> & <span class="highlight">Yeşilyurt</span></div>
-    </div>
-
-    <script>
-        function startLoop(selector, interval) {
-            const items = document.querySelectorAll(selector);
-            let currentIndex = 0;
-
-            setInterval(() => {
-                items[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex + 1) % items.length;
-                items[currentIndex].classList.add('active');
-            }, interval);
-        }
-
-        startLoop('.group-1', 2500); 
-        startLoop('.group-2', 2000); 
-    </script>
+        <div class="feature-item">
+            <div class="icon-circle">⏱️</div>
+            <div class="f-title">TAM ZAMANINDA</div>
+            <div class="f-subtitle">Dakik sürüş, en hızlı rotalar</div>
+        </div>
+    </section>
 
 </body>
 </html>
