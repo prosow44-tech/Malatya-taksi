@@ -10,8 +10,6 @@
             --taxi-yellow: #ffca08;
             --whatsapp-green: #25d366;
             --bg-dark: #0a0a0a;
-            --pulse-orange: rgba(255, 165, 0, 0.7);
-            --pulse-green: rgba(37, 211, 102, 0.7);
         }
 
         body, html {
@@ -29,93 +27,70 @@
         .logo { font-weight: bold; font-size: 1.2rem; }
         .logo span { color: var(--taxi-yellow); }
 
-        /* 3. ANA SAYFA (VİDEO ARKA PLAN) */
+        /* 3. ANA SAYFA (GIF ARKA PLAN) */
         .hero {
             position: relative; width: 100%; height: 85vh;
-            overflow: hidden; display: flex; flex-direction: column; 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('ezgif.com-animated-gif-maker.gif');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center;
         }
-        #bg-video {
-            position: absolute; top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            z-index: -1; transform: translate(-50%, -50%);
-            object-fit: cover; opacity: 0.7;
-        }
 
-        /* 4. ANİMASYONLU METİNLER (DİĞER KODDAN GELENLER) */
+        /* METİN DÖNGÜSÜ */
         .text-area { position: relative; width: 100%; height: 60px; display: flex; justify-content: center; align-items: center; }
-        #top-area { margin-bottom: 20px; }
-        #bottom-area { margin-top: 25px; }
-
         .anim-text {
             position: absolute; width: 100%; font-size: 26px; font-weight: 800;
             color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.9);
             opacity: 0; transition: opacity 0.5s ease-in-out;
-            transform: translateZ(0); will-change: opacity;
         }
-        .c-gold { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .c-gold { color: #FFD700; }
         .c-green { color: #00ff88; }
 
-        /* 5. BUTONLAR VE KALP RİTMİ ANİMASYONU */
-        .btn-area { display: flex; justify-content: center; align-items: center; gap: 6px; width: 100%; z-index: 100; }
-
+        /* 4. NABIZ ATAN BUTONLAR */
+        .btn-area { display: flex; justify-content: center; align-items: center; gap: 8px; z-index: 100; margin: 20px 0; }
         .my-btn {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             width: 180px; height: 75px; color: white; font-weight: bold;
             text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             transition: transform 0.1s; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-
-        .btn-call {
-            background: linear-gradient(to bottom, #FF8008, #FFA500);
-            border-radius: 40px 10px 10px 40px;
-            animation: pulse-orange 2s infinite;
-        }
-
-        .btn-wp {
-            background: linear-gradient(to bottom, #25d366, #128C7E);
-            border-radius: 10px 40px 40px 10px;
-            animation: pulse-green 2s infinite;
-            animation-delay: 1s;
-        }
-
-        .my-btn:active { transform: scale(0.95); }
+        .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 40px 10px 10px 40px; animation: pulse-orange 2s infinite; }
+        .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 10px 40px 40px 10px; animation: pulse-green 2s infinite; animation-delay: 1s; }
         .sub-txt { font-size: 11px; font-weight: normal; margin-top: 3px; opacity: 0.9; }
 
-        @keyframes pulse-orange {
-            0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 165, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); }
-        }
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+        @keyframes pulse-orange { 0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 165, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); } }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* 6. HAKKINDA BÖLÜMÜ (PARLAK WEBP ARKA PLAN) */
+        /* 5. HAKKINDA BÖLÜMÜ (GECE.WEBP BOYUTUNA GÖRE) */
         .about-section {
-            padding: 100px 10%;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('gece.webp');
-            background-size: cover; background-position: center;
-            text-align: center; border-top: 2px solid var(--taxi-yellow);
+            width: 100%;
+            min-height: 100vh; /* Görsel büyüklüğüne göre tam ekran veya daha fazla kaplar */
+            background: url('gece.webp') no-repeat center center;
+            background-size: cover;
+            display: flex; justify-content: center; align-items: center;
+            border-top: 3px solid var(--taxi-yellow);
         }
         .about-content {
-            background: rgba(0,0,0,0.6); padding: 40px; border-radius: 25px;
-            display: inline-block; border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            margin: 20px;
+            border-radius: 20px;
+            max-width: 700px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .about-content h2 { color: var(--taxi-yellow); font-size: 2.5rem; margin-bottom: 20px; }
+        .about-content h2 { color: var(--taxi-yellow); font-size: 2.2rem; margin-bottom: 15px; }
 
         /* ÖZELLİKLER */
-        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 50px 5%; background: #111; gap: 20px; }
-        .f-item { text-align: center; flex: 1; min-width: 200px; }
-        .f-icon { font-size: 3rem; margin-bottom: 10px; }
+        .features { display: flex; justify-content: space-around; flex-wrap: wrap; padding: 40px 5%; background: #111; }
+        .f-item { text-align: center; flex: 1; min-width: 200px; padding: 10px; }
 
         @media (max-width: 480px) {
             .btn-area { flex-direction: column; gap: 15px; }
-            .my-btn { width: 85%; border-radius: 30px; }
-            .anim-text { font-size: 20px; }
+            .my-btn { width: 80%; border-radius: 30px; }
+            .hero { height: auto; padding: 60px 0; }
         }
     </style>
 </head>
@@ -126,10 +101,6 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="gece%202.webm" type="video/webm">
-        </video>
-        
         <div id="top-area" class="text-area">
             <div class="anim-text t-group1" style="opacity: 1;">Malatya <span class="c-gold">VIP</span> Taksi 🚖</div>
             <div class="anim-text t-group1"><span class="c-gold">Zeynal Ağca</span> Güvencesiyle ✨</div>
@@ -141,7 +112,6 @@
                 📞 HEMEN ARA
                 <span class="sub-txt">Tıkla ve Çağır</span>
             </a>
-
             <a href="https://wa.me/905332153481" class="my-btn btn-wp">
                 💬 WHATSAPP
                 <span class="sub-txt">Konum Gönder</span>
@@ -149,24 +119,23 @@
         </div>
 
         <div id="bottom-area" class="text-area">
-            <div class="anim-text t-group3" style="opacity: 1;">Şehir İçi & <span class="c-gold">Şehirler Arası</span></div>
-            <div class="anim-text t-group3">Havalimanı <span class="c-green">VIP</span> Transfer</div>
-            <div class="anim-text t-group3">Uygun Fiyat <span class="c-gold">Kaliteli</span> Hizmet</div>
+            <div class="anim-text t-group3" style="opacity: 1;">Havalimanı <span class="c-gold">VIP</span> Transfer</div>
             <div class="anim-text t-group3">7/24 <span class="c-green">Kesintisiz</span> Ulaşım</div>
+            <div class="anim-text t-group3">Uygun Fiyat <span class="c-gold">Kaliteli</span> Hizmet</div>
         </div>
     </section>
 
     <section class="about-section">
         <div class="about-content">
             <h2>Hakkımızda</h2>
-            <p><i>Zeynal Ağca tarafından sunulan hizmet metni buraya gelecek...</i></p>
+            <p>Zeynal Ağca liderliğinde Malatya'nın her noktasına konforlu, hızlı ve güvenilir ulaşım sağlıyoruz. Müşteri memnuniyetini ön planda tutan hizmet anlayışımızla şehir içi ve VIP transferlerinizde yanınızdayız.</p>
         </div>
     </section>
 
     <section class="features">
-        <div class="f-item"><div class="f-icon">✨</div><b>VIP KONFOR</b></div>
-        <div class="f-item"><div class="f-icon) ">💰</div><b>UYGUN FİYAT</b></div>
-        <div class="f-item"><div class="f-icon">⏱️</div><b>TAM ZAMANINDA</b></div>
+        <div class="f-item"><b>✨ VIP KONFOR</b></div>
+        <div class="f-item"><b>💰 UYGUN FİYAT</b></div>
+        <div class="f-item"><b>⏱️ TAM ZAMANINDA</b></div>
     </section>
 
     <script>
@@ -177,19 +146,17 @@
             var i3 = 0;
 
             function run() {
-                // Üst grup
                 var n1 = (i1 + 1) % g1.length;
                 g1[i1].style.opacity = "0";
                 g1[n1].style.opacity = "1";
                 i1 = n1;
 
-                // Alt grup
                 var n3 = (i3 + 1) % g3.length;
                 g3[i3].style.opacity = "0";
                 g3[n3].style.opacity = "1";
                 i3 = n3;
             }
-            setInterval(run, 2500); // 2.5 saniyede bir değişir
+            setInterval(run, 2500);
         })();
     </script>
 
