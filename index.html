@@ -7,6 +7,19 @@
     <title>Malatya-Taksi Zeynal Ağca | 7/24 VIP Ulaşım</title>
     <meta name="description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16894468875"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-16894468875');
+    </script>
+    <script>
+      gtag('config', 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-', {
+        'phone_conversion_number': '05332153481'
+      });
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -111,7 +124,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
-        /* --- HAKKIMIZDA BÖLÜMÜ (DAHA SAYDAM YAPILDI) --- */
+        /* --- HAKKIMIZDA BÖLÜMÜ --- */
         .about-wrap { 
             padding: 100px 5%; 
             background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('gece.webp') fixed center; 
@@ -122,9 +135,9 @@
         }
 
         .about-box {
-            background: rgba(0, 0, 0, 0.25); /* Saydamlık artırıldı (0.55 -> 0.25) */
+            background: rgba(0, 0, 0, 0.25);
             backdrop-filter: var(--gb-blur);
-            -webkit-backdrop-filter: var(--gb-blur); /* Safari desteği için */
+            -webkit-backdrop-filter: var(--gb-blur);
             padding: 60px 40px; border-radius: 40px; 
             width: 100%; max-width: 1100px; 
             margin: 0 auto;
@@ -179,7 +192,7 @@
             .my-btn { width: 90%; height: 85px; }
             
             .about-wrap { padding: 60px 5%; }
-            .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } /* Mobilde okunurluk için bir tık daha koyu tutuldu */
+            .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } 
             .about-title { font-size: 2rem; }
             .about-text { font-size: 1.1rem; }
             .why-us-card { padding: 20px; }
@@ -208,7 +221,7 @@
         </div>
 
         <div class="btn-container">
-            <a href="tel:05332153481" class="my-btn btn-call">📞 HEMEN ARA <small style="display:block; font-size:11px;">Tıkla ve Çağır</small></a>
+            <a href="tel:05332153481" class="my-btn btn-call" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:11px;">Tıkla ve Çağır</small></a>
             <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp">💬 WHATSAPP <small style="display:block; font-size:11px;">Konum Gönder</small></a>
         </div>
 
@@ -219,7 +232,7 @@
         </div>
     </section>
 
-    <a href="tel:05332153481" class="sticky-call">📞</a>
+    <a href="tel:05332153481" class="sticky-call" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞</a>
 
     <div class="neon-bar"></div>
 
