@@ -6,7 +6,14 @@
     
     <title>Malatya-Taksi Zeynal Ağca | 7/24 VIP Ulaşım</title>
     <meta name="description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
-    
+    <link rel="canonical" href="https://www.malatya-taksi.com/">
+
+    <!--
+        © 2026 Zeynal Ağca - malatya-taksi.com
+        Bu sitenin tasarımı ve içeriği izinsiz kopyalanamaz.
+        Site sahipliği kanıtı / imza kodu: MT-ZA-2026-ORIGIN
+    -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16894468875"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,6 +27,8 @@
       });
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
@@ -36,6 +45,17 @@
             background-color: #000; color: var(--text-white); scroll-behavior: smooth;
             overflow-x: hidden;
         }
+
+        /* Metin/görsel seçimini ve sürüklemeyi kısıtla (kopyalamayı zorlaştırır) */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
+        /* Telefon/WhatsApp butonlarında tıklama çalışmaya devam etsin */
+        .my-btn, .sticky-call, a { pointer-events: auto; }
 
         /* 1. NEON AKIŞ ÇİZGİSİ */
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
@@ -296,6 +316,22 @@
             }
         }
         loop('.g1', 2500); loop('.g2', 2000);
+
+        /* ---- Kopyalama caydırıcıları (hafif, hız etkisi yok) ---- */
+        document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+        document.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        document.addEventListener('copy', function (e) { e.preventDefault(); });
+        document.addEventListener('keydown', function (e) {
+            const k = e.key ? e.key.toUpperCase() : '';
+            if (k === 'F12') { e.preventDefault(); }
+            if (e.ctrlKey && e.shiftKey && (k === 'I' || k === 'J' || k === 'C')) { e.preventDefault(); }
+            if (e.ctrlKey && (k === 'U' || k === 'S')) { e.preventDefault(); }
+        });
+
+        /* Sayfanın başka bir sitede iframe içine gizlice gömülmesini engelle (clickjacking / "çökertme" girişimlerine karşı) */
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
     </script>
 </body>
 </html>
