@@ -34,12 +34,6 @@
     }
     </script>
 
-    <!--
-        © 2026 Zeynal Ağca - malatya-taksi.com
-        Bu sitenin tasarımı ve içeriği izinsiz kopyalanamaz.
-        Site sahipliği kanıtı / imza kodu: MT-ZA-2026-ORIGIN
-    -->
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16894468875"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -116,6 +110,12 @@
             background: linear-gradient(to right, #ffca08, #fff, #ffca08);
             background-size: 200% auto; -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
+        }
+
+        .site-logo {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
         }
 
         @keyframes shine { to { background-position: 200% center; } }
@@ -236,6 +236,7 @@
         /* --- MOBİL UYUMLULUK --- */
         @media (max-width: 768px) { 
             .logo { font-size: 1.15rem; }
+            .site-logo { height: 35px; }
             .status-active { font-size: 0.65rem; padding: 6px 12px; }
             .hero { height: 90vh; }
             .anim-text { font-size: 24px; }
@@ -261,6 +262,7 @@
 
     <header>
         <div class="logo">
+            <img src="logo.png" alt="Malatya Taksi Logo" class="site-logo">
             <span>🚖 Malatya-Taksi</span> Zeynal Ağca
         </div>
         <div class="status-active"><span class="status-dot"></span> ŞU AN AKTİF</div>
