@@ -182,16 +182,38 @@
         }
 
         /* --- HAKKIMIZDA BÖLÜMÜ --- */
-        .about-wrap { 
+        .about-wrap {
+            position: relative;
             padding: 100px 5%; 
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('gece.webp') fixed center; 
-            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+        }
+
+        .about-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .about-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+            z-index: 1;
         }
 
         .about-box {
+            position: relative;
+            z-index: 2;
             background: rgba(0, 0, 0, 0.25);
             backdrop-filter: var(--gb-blur);
             -webkit-backdrop-filter: var(--gb-blur);
@@ -298,6 +320,11 @@
     <div class="neon-bar"></div>
 
     <section class="about-wrap" id="hakkimizda">
+        <video autoplay loop muted playsinline class="about-video-bg">
+            <source src="gece.mp4" type="video/mp4">
+        </video>
+        <div class="about-overlay"></div>
+        
         <div class="about-box">
             <h2 class="about-title">Hakkımızda</h2>
             
