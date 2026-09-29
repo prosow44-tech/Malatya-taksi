@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <!-- ERİŞİLEBİLİRLİK: Sayfa yakınlaştırmaya (zoom) açık bırakıldı -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Malatya-Taksi Zeynal Ağca | 7/24 VIP Ulaşım</title>
     <meta name="description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
     <link rel="canonical" href="https://www.malatya-taksi.com/">
 
-    <!-- LCP KESİN ÇÖZÜMÜ: Video yerine, videonun ilk karesi olan JPG anında önyüklenir -->
-    <link rel="preload" as="image" href="ana-sayfa-1-poster.jpg" fetchpriority="high">
+    <!-- 404 HATASI ÇÖZÜMÜ: Sunucuda bulunmayan ana-sayfa-1-poster.jpg için preload komutu geçici olarak kaldırıldı. -->
 
     <meta property="og:type" content="business.business">
     <meta property="og:locale" content="tr_TR">
@@ -38,20 +36,12 @@
     }
     </script>
 
-    <!--
-        © 2026 Zeynal Ağca - malatya-taksi.com
-        Bu sitenin tasarımı ve içeriği izinsiz kopyalanamaz.
-        Site sahipliği kanıtı / imza kodu: MT-ZA-2026-ORIGIN
-    -->
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16894468875"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-16894468875');
-    </script>
-    <script>
       gtag('config', 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-', {
         'phone_conversion_number': '05332153481'
       });
@@ -61,7 +51,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- FCP KESİN ÇÖZÜMÜ: Harici style.css dosyası silindi, kodlar orijinalindeki gibi inline yapıldı -->
     <style>
         :root {
             --taxi-yellow: #ffca08;
@@ -145,33 +134,33 @@
             100% { box-shadow: 0 0 5px #00ff88; transform: scale(1); }
         }
 
-        /* 3. HERO SECTION */
         .hero {
             position: relative; width: 100%; height: 95vh;
             background-color: #111; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             overflow: hidden;
         }
-
+        
         .hero-video-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 0; pointer-events: none;
+            background-color: #000;
         }
         
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.20)); /* İstenilen açık/orijinal gölge */
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.20)); 
             z-index: 1; pointer-events: none;
         }
 
         .text-wrapper { position: relative; width: 100%; height: 80px; z-index: 10; display: flex; justify-content: center; align-items: center; }
         
-        /* ORİJİNAL ÇALIŞAN SİSTEM GERİ GETİRİLDİ (Üst üste binme hatası sıfırlandı) */
         .anim-text {
             position: absolute; font-size: 38px; font-weight: 900; color: #fff;
-            text-shadow: 0 5px 25px rgba(0,0,0,1); opacity: 0; transition: 0.6s ease-in-out;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);
+            opacity: 0; transition: opacity 0.6s ease-in-out; pointer-events: none;
         }
         .anim-text.active { opacity: 1; }
 
@@ -198,47 +187,30 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
-        /* --- HAKKIMIZDA BÖLÜMÜ --- */
         .about-wrap { 
-            position: relative;
-            padding: 100px 5%; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-color: #111;
+            position: relative; padding: 100px 5%; display: flex;
+            justify-content: center; align-items: center; overflow: hidden; background-color: #111;
         }
-
+        
         .about-video-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 0; pointer-events: none;
-            opacity: 0; transition: opacity 0.5s ease;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; transition: opacity 0.5s ease; opacity: 0;
         }
         .about-video-bg.loaded { opacity: 1; }
 
         .about-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)); z-index: 1; pointer-events: none;
         }
 
         .about-box {
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: var(--gb-blur);
-            -webkit-backdrop-filter: var(--gb-blur);
-            padding: 60px 40px; border-radius: 40px; 
-            width: 100%; max-width: 1100px; 
-            margin: 0 auto;
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-            box-sizing: border-box;
+            position: relative; z-index: 2; background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
+            padding: 60px 40px; border-radius: 40px; width: 100%; max-width: 1100px; 
+            margin: 0 auto; border: 1px solid var(--glass-border); box-shadow: 0 40px 80px rgba(0,0,0,0.6); box-sizing: border-box;
         }
 
         .about-title { color: var(--taxi-yellow); text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 30px; }
-        
         .about-text { font-size: 1.2rem; line-height: 1.8; color: #f0f0f0; text-align: center; margin-bottom: 40px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
         .why-us-card {
@@ -247,16 +219,10 @@
         }
 
         .why-us-card h3 { color: var(--taxi-yellow); margin-top: 0; font-size: 1.5rem; margin-bottom: 15px; }
-        
         .why-us-list { list-style: none; padding: 0; margin: 0; }
         .why-us-list li { margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
 
-        .features-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 30px; 
-        }
-
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
         
         .icon {
@@ -268,12 +234,8 @@
         .f-title { font-weight: 800; font-size: 16px; color: var(--taxi-yellow); text-transform: uppercase; margin-bottom: 5px; }
         .f-desc { font-size: 13px; color: #ccc; }
 
-        /* --- FOOTER --- */
-        footer {
-            background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);
-        }
+        footer { background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- MOBİL UYUMLULUK --- */
         @media (max-width: 768px) { 
             .logo { font-size: 1.15rem; }
             .site-logo { height: 35px; }
@@ -305,87 +267,88 @@
             <img src="Malatya Taksi.jpg" alt="Malatya Taksi Logo" class="site-logo">
             <span>Malatya-Taksi</span> Zeynal Ağca
         </div>
-        <div class="status-active"><span class="status-dot"></span> ŞU AN AKTİF</div>
+        <div class="status-active" aria-label="Araçlarımız Şu An Aktif"><span class="status-dot"></span> ŞU AN AKTİF</div>
     </header>
 
-    <section class="hero">
-        <!-- VİDEO DÜZELTMESİ: Poster görseli eklendi (Ağaç grafiği şokunu önler) -->
-        <video autoplay loop muted playsinline id="hero-vid" class="hero-video-bg" poster="ana-sayfa-1-poster.jpg">
-            <source src="ana-sayfa-1.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        
-        <div class="text-wrapper">
-            <div class="anim-text g1 active">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
-            <div class="anim-text g1">Konforlu ve Güvenli ✨</div>
-            <div class="anim-text g1">7/24 <span style="color:#00ff88">Lüks</span> Ulaşım 🛡️</div>
-        </div>
-
-        <div class="btn-container">
-            <a href="tel:05332153481" class="my-btn btn-call" aria-label="Hemen Taksi Çağır" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:11px;">Tıkla ve Çağır</small></a>
-            <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp ile Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:11px;">Konum Gönder</small></a>
-        </div>
-
-        <div class="text-wrapper">
-            <div class="anim-text g2 active">Havalimanı Transfer</div>
-            <div class="anim-text g2">VIP Şehir İçi Tur</div>
-            <div class="anim-text g2">Otogar & Hastane Hattı</div>
-        </div>
-    </section>
-
-    <!-- ERİŞİLEBİLİRLİK ÇÖZÜMÜ: Emojili bağlantıya görünmez okuyucu etiketi atandı -->
-    <a href="tel:05332153481" class="sticky-call" aria-label="Hızlı Arama" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞</a>
-
-    <div class="neon-bar"></div>
-
-    <section class="about-wrap" id="hakkimizda">
-        <!-- DERSHANE MANTIĞI: İkinci video ağ tasarrufu için durduruldu, Scroll edilince gecikmeli başlatılacak -->
-        <video id="gece-vid" loop muted playsinline preload="none" class="about-video-bg">
-            <source src="gece.mp4" type="video/mp4">
-        </video>
-        <div class="about-overlay"></div>
-        
-        <div class="about-box">
-            <h2 class="about-title">Hakkımızda</h2>
+    <!-- ERİŞİLEBİLİRLİK ÇÖZÜMÜ: <main> etiketi eklenerek "landmark (ana işaret)" hatası giderildi. Tüm içerikler bu etiket içine alındı. -->
+    <main>
+        <section class="hero">
+            <!-- 404 HATASI ÇÖZÜMÜ: Sunucuda olmayan "poster" niteliği silindi. Eğer sonradan eklenecekse buraya yazılabilir. -->
+            <video autoplay loop muted playsinline id="hero-vid" class="hero-video-bg">
+                <source src="ana-sayfa-1.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
             
-            <div class="about-text">
-                Malatya-Taksi Zeynal Ağca olarak, lüks ve güveni bir araya getiriyoruz. 
-                Her yolculuğu sadece bir ulaşım değil, özel bir deneyim haline dönüştürüyoruz.
+            <div class="text-wrapper">
+                <div class="anim-text g1 active">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
+                <div class="anim-text g1">Konforlu ve Güvenli ✨</div>
+                <div class="anim-text g1">7/24 <span style="color:#00ff88">Lüks</span> Ulaşım 🛡️</div>
             </div>
 
-            <div class="why-us-card">
-                <h3>Neden Bizi Seçmelisiniz?</h3>
-                <ul class="why-us-list">
-                    <li><span aria-hidden="true">🚀</span> <b>Anında Yanınızda:</b> Malatya'nın en hızlı VIP ağı.</li>
-                    <li><span aria-hidden="true">🧼</span> <b>Hijyen Garantisi:</b> Her yolculuk sonrası dezenfekte edilen araçlar.</li>
-                    <li><span aria-hidden="true">💎</span> <b>Kişiye Özel:</b> Sadece ulaşım değil, kalite sağlıyoruz.</li>
-                </ul>
+            <div class="btn-container">
+                <a href="tel:05332153481" class="my-btn btn-call" aria-label="Hemen Taksi Çağır" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:12px;">Tıkla ve Çağır</small></a>
+                <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp Üzerinden Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:12px;">Konum Gönder</small></a>
             </div>
 
-            <div class="features-grid">
-                <div class="f-item">
-                    <div class="icon" aria-hidden="true">🚕</div>
-                    <div class="f-title">7/24 HİZMET</div>
-                    <div class="f-desc">Zaman fark etmeksizin yanınızdayız.</div>
+            <div class="text-wrapper">
+                <div class="anim-text g2 active">Havalimanı Transfer</div>
+                <div class="anim-text g2">VIP Şehir İçi Tur</div>
+                <div class="anim-text g2">Otogar & Hastane Hattı</div>
+            </div>
+        </section>
+
+        <a href="tel:05332153481" class="sticky-call" aria-label="Hızlı Arama Butonu" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞</a>
+
+        <div class="neon-bar"></div>
+
+        <section class="about-wrap" id="hakkimizda">
+            <video id="gece-vid" loop muted playsinline preload="none" class="about-video-bg">
+                <source src="gece.mp4" type="video/mp4">
+            </video>
+            <div class="about-overlay"></div>
+            
+            <div class="about-box">
+                <h2 class="about-title">Hakkımızda</h2>
+                
+                <div class="about-text">
+                    Malatya-Taksi Zeynal Ağca olarak, lüks ve güveni bir araya getiriyoruz. 
+                    Her yolculuğu sadece bir ulaşım değil, özel bir deneyim haline dönüştürüyoruz.
                 </div>
-                <div class="f-item">
-                    <div class="icon" aria-hidden="true">💰</div>
-                    <div class="f-title">NET FİYAT</div>
-                    <div class="f-desc">Sürprizsiz, şeffaf tarife.</div>
+
+                <div class="why-us-card">
+                    <h3>Neden Bizi Seçmelisiniz?</h3>
+                    <ul class="why-us-list">
+                        <li><span aria-hidden="true">🚀</span> <b>Anında Yanınızda:</b> Malatya'nın en hızlı VIP ağı.</li>
+                        <li><span aria-hidden="true">🧼</span> <b>Hijyen Garantisi:</b> Her yolculuk sonrası dezenfekte edilen araçlar.</li>
+                        <li><span aria-hidden="true">💎</span> <b>Kişiye Özel:</b> Sadece ulaşım değil, kalite sağlıyoruz.</li>
+                    </ul>
                 </div>
-                <div class="f-item">
-                    <div class="icon" aria-hidden="true">✨</div>
-                    <div class="f-title">LÜKS ARAÇLAR</div>
-                    <div class="f-desc">Modeli yüksek, tam konfor.</div>
-                </div>
-                <div class="f-item">
-                    <div class="icon" aria-hidden="true">⏱️</div>
-                    <div class="f-title">TAM VAKTİNDE</div>
-                    <div class="f-desc">Gecikme olmadan kapınızdayız.</div>
+
+                <div class="features-grid">
+                    <div class="f-item">
+                        <div class="icon" aria-hidden="true">🚕</div>
+                        <div class="f-title">7/24 HİZMET</div>
+                        <div class="f-desc">Zaman fark etmeksizin yanınızdayız.</div>
+                    </div>
+                    <div class="f-item">
+                        <div class="icon" aria-hidden="true">💰</div>
+                        <div class="f-title">NET FİYAT</div>
+                        <div class="f-desc">Sürprizsiz, şeffaf tarife.</div>
+                    </div>
+                    <div class="f-item">
+                        <div class="icon" aria-hidden="true">✨</div>
+                        <div class="f-title">LÜKS ARAÇLAR</div>
+                        <div class="f-desc">Modeli yüksek, tam konfor.</div>
+                    </div>
+                    <div class="f-item">
+                        <div class="icon" aria-hidden="true">⏱️</div>
+                        <div class="f-title">TAM VAKTİNDE</div>
+                        <div class="f-desc">Gecikme olmadan kapınızdayız.</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <div class="neon-bar"></div>
 
@@ -399,7 +362,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // ORİJİNAL JS DÖNGÜSÜ (Üst üste binme kesin çözümü)
+            // ORİJİNAL JS DÖNGÜSÜ
             function loop(s, t) {
                 const el = document.querySelectorAll(s); let i = 0;
                 if(el.length > 0) {
@@ -410,8 +373,14 @@
                     }, t);
                 }
             }
-            loop('.g1', 2500); 
-            loop('.g2', 2000);
+            
+            // FCP/LCP engellemesini önlemek ve CPU'yu rahatlatmak için döngü başlangıcını asenkron yapıyoruz (requestAnimationFrame kullanımı)
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    loop('.g1', 2500); 
+                    loop('.g2', 2000);
+                }, 500);
+            });
 
             // ANA VİDEO YAVAŞLATMA (%80 Hız)
             const heroVid = document.getElementById('hero-vid');
@@ -419,8 +388,7 @@
                 heroVid.playbackRate = 0.8;
             }
 
-            // DERSHANE MANTIĞI: "gece.mp4" sadece ekranda göründüğünde (0.3 saniye gecikme ile) yüklenir. 
-            // Sayfa açılışında fazladan Ağ/CPU harcanmaz. TBT'yi ciddi şekilde düşürür.
+            // GECİKMELİ VİDEO YÜKLEME (TBT İyileştirmesi)
             let videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
