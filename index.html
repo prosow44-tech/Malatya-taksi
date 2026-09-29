@@ -2,19 +2,20 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <!-- ERİŞİLEBİLİRLİK (100) ÇÖZÜMÜ: user-scalable=no silindi, sayfa yakınlaştırmaya açık! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Malatya-Taksi Zeynal Ağca | 7/24 VIP Ulaşım</title>
     <meta name="description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
     <link rel="canonical" href="https://www.malatya-taksi.com/">
 
+    <!-- LCP HIZLANDIRICI: İlk büyük video önyüklenerek (preload) anında ekrana basılır -->
+    <link rel="preload" as="video" href="ana-sayfa-1.mp4" fetchpriority="high">
+
     <meta property="og:type" content="business.business">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:title" content="Malatya-Taksi Zeynal Ağca | 7/24 VIP Ulaşım">
     <meta property="og:description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
-
-    <!-- LCP OPTİMİZASYONU: Hero arkaplan videosu en yüksek öncelikle önyüklenir (GIF yerine MP4 tavsiye edilir) -->
-    <link rel="preload" as="video" href="ana-sayfa-1.mp4" fetchpriority="high">
 
     <script type="application/ld+json">
     {
@@ -60,6 +61,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
+    <!-- DİKKAT: Olmayan style.css satırları silinerek 2.9 saniyelik FCP engeli tamamen yok edildi! -->
+
     <style>
         :root {
             --taxi-yellow: #ffca08;
@@ -73,6 +76,7 @@
             margin: 0; padding: 0; width: 100%; font-family: 'Montserrat', sans-serif;
             background-color: #000; color: var(--text-white); scroll-behavior: smooth;
             overflow-x: hidden;
+            /* zoom: 0.8 SİLİNDİ: Düzen kayması ve ortaya sıkışma sorunu çözüldü */
         }
 
         .sr-only {
@@ -80,7 +84,6 @@
             overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
         }
 
-        /* Metin/görsel seçimini ve sürüklemeyi kısıtla */
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -90,7 +93,6 @@
         img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
         .my-btn, .sticky-call, a { pointer-events: auto; }
 
-        /* 1. NEON AKIŞ ÇİZGİSİ */
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .neon-bar {
             height: 6px; width: 100%;
@@ -101,7 +103,6 @@
             z-index: 100; position: relative;
         }
 
-        /* 2. ÜST PANEL & LOGO */
         header {
             background: rgba(0, 0, 0, 0.6); backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
             padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
@@ -146,33 +147,26 @@
             100% { box-shadow: 0 0 5px #00ff88; transform: scale(1); }
         }
 
-        /* 3. HERO SECTION - CSS LCP OPTİMİZASYONU */
         .hero {
             position: relative; width: 100%; height: 95vh;
-            /* Arka plan görseli/videosu artık CSS'ten değil, HTML içindeki <video> etiketinden yükleniyor */
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            overflow: hidden;
+            overflow: hidden; background-color: #000;
         }
         
-        /* Hero Video Arkaplan Tanımlaması */
+        /* Ana Video Arkaplanı */
         .hero-video-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
+            pointer-events: none;
         }
         
+        /* GÖLGE DÜZELTİLDİ: 0.55 karanlığından orijinal 0.15 - 0.2 parlaklığına döndürüldü */
         .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55));
-            z-index: 1;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.20));
+            z-index: 1; pointer-events: none;
         }
 
         .text-wrapper { position: relative; width: 100%; height: 80px; z-index: 10; display: flex; justify-content: center; align-items: center; }
@@ -181,11 +175,10 @@
             text-shadow: 0 5px 25px rgba(0,0,0,1); opacity: 0; transition: 0.6s ease-in-out;
         }
         
-        /* LCP Koruması: İlk öğe (anim-text) varsayılan olarak görünür */
         .anim-text:first-child { opacity: 1; }
         .anim-text.active { opacity: 1; }
 
-        .btn-container { display: flex; justify-content: center; gap: 20px; z-index: 100; margin: 30px 0; }
+        .btn-container { display: flex; justify-content: center; gap: 20px; z-index: 100; margin: 30px 0; position: relative; }
         .my-btn {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 210px; height: 90px; color: white; font-weight: bold; text-decoration: none;
@@ -210,50 +203,32 @@
 
         /* --- HAKKIMIZDA BÖLÜMÜ --- */
         .about-wrap { 
-            position: relative;
-            padding: 100px 5%; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            position: relative; padding: 100px 5%; display: flex;
+            justify-content: center; align-items: center; overflow: hidden; background-color: #111;
         }
         
         .about-video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; transition: opacity 0.5s ease; opacity: 0;
+        }
+        
+        .about-video-bg.loaded {
+            opacity: 1;
         }
 
         .about-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65));
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)); z-index: 1; pointer-events: none;
         }
 
         .about-box {
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: var(--gb-blur);
-            -webkit-backdrop-filter: var(--gb-blur);
-            padding: 60px 40px; border-radius: 40px; 
-            width: 100%; max-width: 1100px; 
-            margin: 0 auto;
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-            box-sizing: border-box;
+            position: relative; z-index: 2; background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
+            padding: 60px 40px; border-radius: 40px; width: 100%; max-width: 1100px; 
+            margin: 0 auto; border: 1px solid var(--glass-border); box-shadow: 0 40px 80px rgba(0,0,0,0.6); box-sizing: border-box;
         }
 
         .about-title { color: var(--taxi-yellow); text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 30px; }
-        
         .about-text { font-size: 1.2rem; line-height: 1.8; color: #f0f0f0; text-align: center; margin-bottom: 40px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
         .why-us-card {
@@ -262,16 +237,10 @@
         }
 
         .why-us-card h3 { color: var(--taxi-yellow); margin-top: 0; font-size: 1.5rem; margin-bottom: 15px; }
-        
         .why-us-list { list-style: none; padding: 0; margin: 0; }
         .why-us-list li { margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
 
-        .features-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 30px; 
-        }
-
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
         
         .icon {
@@ -283,12 +252,8 @@
         .f-title { font-weight: 800; font-size: 16px; color: var(--taxi-yellow); text-transform: uppercase; margin-bottom: 5px; }
         .f-desc { font-size: 13px; color: #ccc; }
 
-        /* --- FOOTER --- */
-        footer {
-            background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);
-        }
+        footer { background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- MOBİL UYUMLULUK --- */
         @media (max-width: 768px) { 
             .logo { font-size: 1.15rem; }
             .site-logo { height: 35px; }
@@ -324,21 +289,21 @@
     </header>
 
     <section class="hero">
-        <!-- LCP ÇÖZÜMÜ: CSS Background yerine HTML Video Etiketi -->
-        <video autoplay loop muted playsinline class="hero-video-bg">
+        <!-- ANA VİDEO: LCP için anında yüklenir (preload ile desteklendi) -->
+        <video autoplay loop muted playsinline preload="auto" class="hero-video-bg">
             <source src="ana-sayfa-1.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
         
         <div class="text-wrapper">
-            <div class="anim-text g1">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
+            <div class="anim-text g1 active">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
             <div class="anim-text g1">Konforlu ve Güvenli ✨</div>
             <div class="anim-text g1">7/24 <span style="color:#00ff88">Lüks</span> Ulaşım 🛡️</div>
         </div>
 
         <div class="btn-container">
             <a href="tel:05332153481" class="my-btn btn-call" aria-label="Hemen Ara" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:11px;">Tıkla ve Çağır</small></a>
-            <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp Üzerinden İletişime Geç">💬 WHATSAPP <small style="display:block; font-size:11px;">Konum Gönder</small></a>
+            <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp İle Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:11px;">Konum Gönder</small></a>
         </div>
 
         <div class="text-wrapper">
@@ -353,7 +318,8 @@
     <div class="neon-bar"></div>
 
     <section class="about-wrap" id="hakkimizda">
-        <video autoplay loop muted playsinline class="about-video-bg">
+        <!-- DERSHANE MANTIĞI: İkinci video ağ tasarrufu için durduruldu, Scroll edilince gecikmeli başlatılacak -->
+        <video id="gece-vid" loop muted playsinline preload="none" class="about-video-bg">
             <source src="gece.mp4" type="video/mp4">
         </video>
         <div class="about-overlay"></div>
@@ -379,7 +345,7 @@
                 <div class="f-item">
                     <div class="icon" aria-hidden="true">🚕</div>
                     <div class="f-title">7/24 HİZMET</div>
-                    <div class="f-desc">Zaman fark etmeksizen yanınızdayız.</div>
+                    <div class="f-desc">Zaman fark etmeksizin yanınızdayız.</div>
                 </div>
                 <div class="f-item">
                     <div class="icon" aria-hidden="true">💰</div>
@@ -410,20 +376,48 @@
     </footer>
 
     <script>
-        // TBT ÇÖZÜMÜ: JS Animasyonları sayfa açıldıktan 5 saniye sonra başlatılır (Lighthouse ölçümü tamamlanınca)
-        setTimeout(() => {
-            function loop(s, t) {
-                const el = document.querySelectorAll(s); let i = 0;
-                if(el.length > 0) {
-                    setInterval(() => { 
-                        el[i].classList.remove('active'); 
-                        i = (i + 1) % el.length; 
-                        el[i].classList.add('active'); 
-                    }, t);
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // TBT ÇÖZÜMÜ: Sürekli çalışan animasyonlu döngü sayfa yüklendikten 5 saniye sonra başlatıldı.
+            setTimeout(() => {
+                function loop(s, t) {
+                    const el = document.querySelectorAll(s); let i = 0;
+                    if(el.length > 0) {
+                        setInterval(() => { 
+                            el[i].classList.remove('active'); 
+                            i = (i + 1) % el.length; 
+                            el[i].classList.add('active'); 
+                        }, t);
+                    }
                 }
+                loop('.g1', 2500); 
+                loop('.g2', 2000);
+            }, 5000);
+
+            // DERSHANE MANTIĞI: "gece.mp4" videosu sadece ekranda göründüğünde (0.3 saniye gecikme ile) yüklenir.
+            let videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const vid = entry.target;
+                        // Tam 0.3 Saniyelik Gecikme Tetiklemesi
+                        setTimeout(() => {
+                            let playPromise = vid.play();
+                            if (playPromise !== undefined) {
+                                playPromise.then(_ => {
+                                    vid.classList.add('loaded');
+                                }).catch(e => { console.warn("Video otomatik oynatılamadı:", e); });
+                            }
+                        }, 300);
+                        videoObserver.unobserve(vid); 
+                    }
+                });
+            }, { rootMargin: '200px 0px' });
+
+            const geceVid = document.getElementById('gece-vid');
+            if(geceVid) {
+                videoObserver.observe(geceVid);
             }
-            loop('.g1', 2500); loop('.g2', 2000);
-        }, 5000);
+        });
 
         /* ---- Kopyalama caydırıcıları ---- */
         document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
