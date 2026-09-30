@@ -8,7 +8,6 @@
     <meta name="description" content="Malatya'da konforlu, güvenli ve lüks taksi hizmeti. Zeynal Ağca ile 7/24 havalimanı transfer, otogar ve şehir içi VIP ulaşım.">
     <link rel="canonical" href="https://www.malatya-taksi.com/">
 
-    <!-- 404 HATASI ÇÖZÜMÜ: Olmayan poster resmi silindi, LCP puanı için ana video önyüklemeye (preload) alındı -->
     <link rel="preload" as="video" href="ana-sayfa-1.mp4" fetchpriority="high" type="video/mp4">
 
     <meta property="og:type" content="business.business">
@@ -76,7 +75,7 @@
             user-select: none;
         }
         img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
-        .my-btn, .sticky-call, a { pointer-events: auto; }
+        .my-btn, .sticky-call, a, .copy-number-wrapper { pointer-events: auto; }
 
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .neon-bar {
@@ -171,17 +170,43 @@
         .btn-call { background: linear-gradient(to bottom, #FF8008, #FFA500); border-radius: 45px 15px 15px 45px; color: #000; }
         .btn-wp { background: linear-gradient(to bottom, #25d366, #128C7E); border-radius: 15px 45px 45px 15px; }
 
+        .copy-number-wrapper {
+            position: relative; display: flex; align-items: center; justify-content: center; gap: 15px;
+            background: rgba(0, 0, 0, 0.5); border: 2px solid var(--taxi-yellow);
+            border-radius: 40px; padding: 12px 30px; cursor: pointer; z-index: 100;
+            backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); margin-top: 10px;
+        }
+        .copy-number-wrapper:active {
+            transform: scale(0.95); background: rgba(255, 202, 8, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        .copy-icon { font-size: 28px; }
+        .number-text { font-size: 32px; font-weight: 900; color: var(--text-white); letter-spacing: 2px; }
+        
+        .copy-feedback {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #00ff88; color: #000; font-weight: 900; padding: 10px 20px;
+            border-radius: 20px; font-size: 16px; pointer-events: none; opacity: 0; z-index: 101;
+            box-shadow: 0 5px 15px rgba(0,255,136,0.4); white-space: nowrap;
+        }
+        .copy-feedback.show { animation: floatUp 0.8s ease-out forwards; }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, -50%); }
+            100% { opacity: 0; transform: translate(-50%, -200%); }
+        }
+
         .sticky-call {
-            position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px;
+            position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px;
             background: #ffca08; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 30px; text-decoration: none;
+            justify-content: center; font-size: 26px; text-decoration: none;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999;
             animation: pulse-button 2s infinite;
         }
 
         @keyframes pulse-button {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255, 202, 8, 0); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 202, 8, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
@@ -244,6 +269,11 @@
             .btn-container { flex-direction: column; align-items: center; }
             .my-btn { width: 90%; height: 85px; }
             
+            .sticky-call { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
+            .copy-number-wrapper { padding: 10px 20px; gap: 10px; border-radius: 30px; }
+            .copy-icon { font-size: 22px; }
+            .number-text { font-size: 24px; }
+
             .about-wrap { padding: 60px 5%; }
             .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } 
             .about-title { font-size: 2rem; }
@@ -271,7 +301,6 @@
 
     <main>
         <section class="hero">
-            <!-- 404 HATASI ÇÖZÜMÜ: Sunucuda bulunmayan "poster" niteliği silindi. -->
             <video autoplay loop muted playsinline id="hero-vid" class="hero-video-bg">
                 <source src="ana-sayfa-1.mp4" type="video/mp4">
             </video>
@@ -288,10 +317,10 @@
                 <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp Üzerinden Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:12px;">Konum Gönder</small></a>
             </div>
 
-            <div class="text-wrapper">
-                <div class="anim-text g2 active">Havalimanı Transfer</div>
-                <div class="anim-text g2">VIP Şehir İçi Tur</div>
-                <div class="anim-text g2">Otogar & Hastane Hattı</div>
+            <div class="copy-number-wrapper" onclick="copyNumber()" aria-label="Telefon Numarasını Kopyala">
+                <div class="copy-icon" aria-hidden="true">📋</div>
+                <div class="number-text">0533 215 34 81</div>
+                <div class="copy-feedback" id="copyFeedback">Kopyalandı</div>
             </div>
         </section>
 
@@ -357,7 +386,6 @@
         <div style="margin-top:40px; color:var(--taxi-yellow); font-weight:bold; font-size: 14px; letter-spacing:1px;">© 2026 Zeynal Ağca - Malatya'nın VIP Hattı</div>
     </footer>
 
-    <!-- TBT VE FCP ÇÖZÜMÜ: Harici izleme ve JS betikleri HTML'nin en sonuna taşındı -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
@@ -372,21 +400,51 @@
                 }
             }
             
-            // Animasyon başlangıcı FCP'yi engellememesi için 5 saniye (5000ms) ertelendi
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     loop('.g1', 2500); 
-                    loop('.g2', 2000);
                 }, 5000);
             });
 
-            // ANA VİDEO YAVAŞLATMA (%80 Hız)
+            window.copyNumber = function() {
+                const rawNumber = "05332153481";
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(rawNumber).then(showCopyFeedback).catch(fallbackCopy);
+                } else {
+                    fallbackCopy();
+                }
+            };
+
+            function fallbackCopy() {
+                let textArea = document.createElement("textarea");
+                textArea.value = "05332153481";
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback();
+                } catch (error) {
+                    console.error('Kopyalama başarısız', error);
+                }
+                textArea.remove();
+            }
+
+            function showCopyFeedback() {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.classList.remove('show');
+                void feedback.offsetWidth; 
+                feedback.classList.add('show');
+            }
+
             const heroVid = document.getElementById('hero-vid');
             if(heroVid) {
                 heroVid.playbackRate = 0.8;
             }
 
-            // GECİKMELİ VİDEO YÜKLEME (TBT İyileştirmesi)
             let videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
