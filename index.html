@@ -106,7 +106,7 @@
         }
 
         .site-logo {
-            height: 45px;
+            height: 68px; /* %50 Oranında büyütüldü */
             width: auto;
             object-fit: contain;
         }
@@ -152,7 +152,14 @@
             z-index: 1; pointer-events: none;
         }
 
-        .text-wrapper { position: relative; width: 100%; height: 80px; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        /* Ana İçeriği Yukarı Kaydırma Alanı */
+        .hero-main-content {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; z-index: 10;
+            transform: translateY(-6vh); /* Tüm içerikler yukarı çekildi */
+        }
+
+        .text-wrapper { position: relative; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; }
         
         .anim-text {
             position: absolute; font-size: 38px; font-weight: 900; color: #fff;
@@ -194,6 +201,22 @@
         @keyframes floatUp {
             0% { opacity: 1; transform: translate(-50%, -50%); }
             100% { opacity: 0; transform: translate(-50%, -200%); }
+        }
+
+        .copy-instruction {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--taxi-yellow); font-weight: 900; font-size: 16px; margin-top: 15px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9); z-index: 100;
+            animation: bounce 1.5s infinite ease-in-out; pointer-events: none;
+        }
+        .copy-instruction .arrow-up {
+            width: 32px; height: 32px; margin-bottom: 5px;
+            stroke: var(--taxi-yellow); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .sticky-call {
@@ -262,17 +285,24 @@
 
         @media (max-width: 768px) { 
             .logo { font-size: 1.15rem; }
-            .site-logo { height: 35px; }
+            .site-logo { height: 53px; } /* %50 Oranında büyütüldü */
+            .mobile-hyphen { display: none; } /* Mobilde tire gizlendi */
             .status-active { font-size: 0.65rem; padding: 6px 12px; }
             .hero { height: 90vh; }
+            
+            .hero-main-content { transform: translateY(-4vh); } /* Mobilde ekran sığması için özel oran */
+            
             .anim-text { font-size: 24px; }
-            .btn-container { flex-direction: column; align-items: center; }
-            .my-btn { width: 90%; height: 85px; }
+            .btn-container { flex-direction: column; align-items: center; gap: 15px; margin: 20px 0; }
+            .my-btn { width: 90%; height: 80px; }
             
             .sticky-call { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
-            .copy-number-wrapper { padding: 10px 20px; gap: 10px; border-radius: 30px; }
+            .copy-number-wrapper { padding: 10px 20px; gap: 10px; border-radius: 30px; margin-top: 5px; }
             .copy-icon { font-size: 22px; }
             .number-text { font-size: 24px; }
+            
+            .copy-instruction { font-size: 14px; margin-top: 10px; }
+            .copy-instruction .arrow-up { width: 28px; height: 28px; }
 
             .about-wrap { padding: 60px 5%; }
             .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } 
@@ -294,7 +324,7 @@
     <header>
         <div class="logo">
             <img src="Malatya Taksi.jpg" alt="Malatya Taksi Logo" class="site-logo">
-            <span>Malatya-Taksi</span> Zeynal Ağca
+            <span>Malatya<span class="mobile-hyphen">-</span>Taksi</span> Zeynal Ağca
         </div>
         <div class="status-active" aria-label="Taksiler Şu An Aktif"><span class="status-dot"></span> ŞU AN AKTİF</div>
     </header>
@@ -306,21 +336,30 @@
             </video>
             <div class="hero-overlay"></div>
             
-            <div class="text-wrapper">
-                <div class="anim-text g1 active">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
-                <div class="anim-text g1">Konforlu ve Güvenli ✨</div>
-                <div class="anim-text g1">7/24 <span style="color:#00ff88">Lüks</span> Ulaşım 🛡️</div>
-            </div>
+            <div class="hero-main-content">
+                <div class="text-wrapper">
+                    <div class="anim-text g1 active">Malatya <span style="color:#FFD700">VIP</span> Taksi ✨</div>
+                    <div class="anim-text g1">Konforlu ve Güvenli ✨</div>
+                    <div class="anim-text g1">7/24 <span style="color:#00ff88">Lüks</span> Ulaşım 🛡️</div>
+                </div>
 
-            <div class="btn-container">
-                <a href="tel:05332153481" class="my-btn btn-call" aria-label="Hemen Taksi Çağır" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:12px;">Tıkla ve Çağır</small></a>
-                <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp Üzerinden Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:12px;">Konum Gönder</small></a>
-            </div>
+                <div class="btn-container">
+                    <a href="tel:05332153481" class="my-btn btn-call" aria-label="Hemen Taksi Çağır" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞 HEMEN ARA <small style="display:block; font-size:12px;">Tıkla ve Çağır</small></a>
+                    <a href="https://wa.me/905332153481" target="_blank" class="my-btn btn-wp" aria-label="WhatsApp Üzerinden Konum Gönder">💬 WHATSAPP <small style="display:block; font-size:12px;">Konum Gönder</small></a>
+                </div>
 
-            <div class="copy-number-wrapper" onclick="copyNumber()" aria-label="Telefon Numarasını Kopyala">
-                <div class="copy-icon" aria-hidden="true">📋</div>
-                <div class="number-text">0533 215 34 81</div>
-                <div class="copy-feedback" id="copyFeedback">Kopyalandı</div>
+                <div class="copy-number-wrapper" onclick="copyNumber()" aria-label="Telefon Numarasını Kopyala">
+                    <div class="copy-icon" aria-hidden="true">📋</div>
+                    <div class="number-text">0533 215 34 81</div>
+                    <div class="copy-feedback" id="copyFeedback">Kopyalandı</div>
+                </div>
+
+                <div class="copy-instruction">
+                    <svg class="arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
+                    <span>TIKLA NUMARAYI KOPYALA</span>
+                </div>
             </div>
         </section>
 
