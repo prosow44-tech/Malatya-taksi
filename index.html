@@ -94,21 +94,28 @@
         }
 
         .logo { 
-            font-weight: 700; font-size: 1.6rem; letter-spacing: -0.5px; 
             display: flex; align-items: center; gap: 10px; flex-shrink: 1;
         }
         
-        .logo span { 
+        .site-logo {
+            height: 68px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text-desktop {
+            font-weight: 700; font-size: 1.6rem; letter-spacing: -0.5px; display: block;
+        }
+
+        .logo-text-desktop span { 
             color: var(--taxi-yellow); font-weight: 900; text-transform: uppercase;
             background: linear-gradient(to right, #ffca08, #fff, #ffca08);
             background-size: 200% auto; -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
         }
 
-        .site-logo {
-            height: 68px; /* %50 Oranında büyütüldü */
-            width: auto;
-            object-fit: contain;
+        .logo-text-mobile {
+            display: none;
         }
 
         @keyframes shine { to { background-position: 200% center; } }
@@ -152,11 +159,9 @@
             z-index: 1; pointer-events: none;
         }
 
-        /* Ana İçeriği Yukarı Kaydırma Alanı */
         .hero-main-content {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100%; z-index: 10;
-            transform: translateY(-6vh); /* Tüm içerikler yukarı çekildi */
         }
 
         .text-wrapper { position: relative; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; }
@@ -284,25 +289,37 @@
         footer { background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
 
         @media (max-width: 768px) { 
-            .logo { font-size: 1.15rem; }
-            .site-logo { height: 53px; } /* %50 Oranında büyütüldü */
-            .mobile-hyphen { display: none; } /* Mobilde tire gizlendi */
+            .site-logo { height: 53px; }
+            .logo-text-desktop { display: none; }
+            
+            .logo-text-mobile { 
+                display: flex; align-items: center; gap: 10px; text-align: left;
+                line-height: 1.15; letter-spacing: -0.3px;
+            }
+            .logo-col-yellow { 
+                color: var(--taxi-yellow); font-weight: 900; font-size: 1.15rem; 
+            }
+            .logo-col-white { 
+                color: #fff; font-weight: 700; font-size: 0.95rem;
+            }
+            
             .status-active { font-size: 0.65rem; padding: 6px 12px; }
             .hero { height: 90vh; }
             
-            .hero-main-content { transform: translateY(-4vh); } /* Mobilde ekran sığması için özel oran */
+            /* İçeriğin ekrana sığması için tüm blok yukarı çekildi */
+            .hero-main-content { transform: translateY(-8vh); } 
             
             .anim-text { font-size: 24px; }
-            .btn-container { flex-direction: column; align-items: center; gap: 15px; margin: 20px 0; }
-            .my-btn { width: 90%; height: 80px; }
+            .btn-container { flex-direction: column; align-items: center; gap: 12px; margin: 15px 0; }
+            .my-btn { width: 90%; height: 75px; font-size: 17px; }
             
             .sticky-call { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
-            .copy-number-wrapper { padding: 10px 20px; gap: 10px; border-radius: 30px; margin-top: 5px; }
-            .copy-icon { font-size: 22px; }
-            .number-text { font-size: 24px; }
+            .copy-number-wrapper { padding: 8px 20px; gap: 10px; border-radius: 30px; margin-top: 5px; }
+            .copy-icon { font-size: 20px; }
+            .number-text { font-size: 22px; }
             
             .copy-instruction { font-size: 14px; margin-top: 10px; }
-            .copy-instruction .arrow-up { width: 28px; height: 28px; }
+            .copy-instruction .arrow-up { width: 26px; height: 26px; margin-bottom: 2px; }
 
             .about-wrap { padding: 60px 5%; }
             .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } 
@@ -324,7 +341,13 @@
     <header>
         <div class="logo">
             <img src="Malatya Taksi.jpg" alt="Malatya Taksi Logo" class="site-logo">
-            <span>Malatya<span class="mobile-hyphen">-</span>Taksi</span> Zeynal Ağca
+            <div class="logo-text-desktop">
+                <span>MALATYA-TAKSİ</span> Zeynal Ağca
+            </div>
+            <div class="logo-text-mobile">
+                <div class="logo-col-yellow">MALATYA<br>TAKSİ</div>
+                <div class="logo-col-white">Zeynal<br>Ağca</div>
+            </div>
         </div>
         <div class="status-active" aria-label="Taksiler Şu An Aktif"><span class="status-dot"></span> ŞU AN AKTİF</div>
     </header>
