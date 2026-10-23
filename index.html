@@ -288,7 +288,7 @@
 
         footer { background: rgba(0, 0, 0, 0.85); padding: 50px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        @media (max-width: 768px) { 
+        @media (max-width: 768px) {
             .site-logo { height: 53px; }
             .logo-text-desktop { display: none; }
             
@@ -306,7 +306,6 @@
             .status-active { font-size: 0.65rem; padding: 6px 12px; }
             .hero { height: 90vh; }
             
-            /* İçeriğin ekrana sığması için tüm blok yukarı çekildi */
             .hero-main-content { transform: translateY(-8vh); } 
             
             .anim-text { font-size: 24px; }
@@ -321,14 +320,35 @@
             .copy-instruction { font-size: 14px; margin-top: 10px; }
             .copy-instruction .arrow-up { width: 26px; height: 26px; margin-bottom: 2px; }
 
-            .about-wrap { padding: 60px 5%; }
-            .about-box { padding: 40px 20px; border-radius: 30px; background: rgba(0, 0, 0, 0.35); } 
-            .about-title { font-size: 2rem; }
-            .about-text { font-size: 1.1rem; }
-            .why-us-card { padding: 20px; }
-            .features-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .icon { width: 60px; height: 60px; font-size: 28px; }
-            .f-title { font-size: 13px; }
+            .about-wrap { padding: 40px 0; } 
+            
+            .about-box { 
+                width: 85%;
+                margin: 0 auto; 
+                padding: 30px 15px; 
+                border-radius: 25px; 
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            } 
+            
+            .about-title { font-size: 1.8rem; margin-bottom: 20px; }
+            .about-text { font-size: 1rem; margin-bottom: 25px; }
+            
+            .why-us-card { 
+                padding: 15px; 
+                background: rgba(0, 0, 0, 0.35);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border-left: 3px solid var(--taxi-yellow);
+                margin-bottom: 30px;
+            }
+            .why-us-card h3 { font-size: 1.3rem; }
+            .why-us-list li { font-size: 0.95rem; }
+            
+            .features-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .icon { width: 50px; height: 50px; font-size: 22px; margin-bottom: 10px; }
+            .f-title { font-size: 12px; }
         }
     </style>
 </head>
