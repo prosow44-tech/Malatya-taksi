@@ -738,7 +738,7 @@
             if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
                 setTimeout(() => {
                     pwaBanner.classList.remove('hidden');
-                }, 3000);
+                }, 100);
             }
 
             window.addEventListener('beforeinstallprompt', (e) => {
