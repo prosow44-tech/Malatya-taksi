@@ -15,22 +15,6 @@
     <link rel="icon" href="Malatya Taksi.jpg">
     <link rel="apple-touch-icon" href="Malatya Taksi.jpg">
 
-    <script>
-      window.__kurulumOlayi = null;
-      window.__hemenKurBekliyor = false;
-      window.addEventListener('beforeinstallprompt', function (e) {
-        e.preventDefault();
-        window.__kurulumOlayi = e;
-        if (window.__hemenKurBekliyor) {
-          window.__hemenKurBekliyor = false;
-          try { e.prompt(); } catch (err) {}
-        }
-      });
-      if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
-        navigator.serviceWorker.register('sw.js').catch(function () {});
-      }
-    </script>
-
     <link rel="preload" as="video" href="ana-sayfa-1.mp4" fetchpriority="high" type="video/mp4">
 
     <meta property="og:type" content="business.business">
@@ -98,7 +82,7 @@
             user-select: none;
         }
         img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
-        .my-btn, .sticky-call, a, .copy-number-wrapper, .pwa-banner, .pwa-install-btn, .pwa-close-btn { pointer-events: auto; }
+        .my-btn, .sticky-call, a, .copy-number-wrapper, .pwa-banner, .pwa-install-btn, .pwa-close-btn, .ios-pwa-overlay { pointer-events: auto; }
 
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .neon-bar {
@@ -127,48 +111,27 @@
             border-bottom: none;
         }
 
-        .logo { 
-            display: flex; align-items: center; gap: 10px; flex-shrink: 1;
-        }
-        
-        .site-logo {
-            height: 68px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.75));
-        }
-
-        .logo-text-desktop {
-            font-weight: 700; font-size: 1.6rem; letter-spacing: -0.5px; display: block;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.85);
-        }
-
+        .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 1; }
+        .site-logo { height: 68px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.75)); }
+        .logo-text-desktop { font-weight: 700; font-size: 1.6rem; letter-spacing: -0.5px; display: block; text-shadow: 0 2px 10px rgba(0,0,0,0.85); }
         .logo-text-desktop span { 
             color: var(--taxi-yellow); font-weight: 900; text-transform: uppercase;
             background: linear-gradient(to right, #ffca08, #fff, #ffca08);
             background-size: 200% auto; -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;
         }
-
-        .logo-text-mobile {
-            display: none;
-        }
-
+        .logo-text-mobile { display: none; }
         @keyframes shine { to { background-position: 200% center; } }
 
         .status-active {
-            font-weight: 900; color: #00ff88; font-size: 0.8rem;
-            background: rgba(0, 0, 0, 0.45);
+            font-weight: 900; color: #00ff88; font-size: 0.8rem; background: rgba(0, 0, 0, 0.45);
             padding: 8px 15px; border-radius: 40px; border: 2px solid #00ff88;
-            display: flex; align-items: center; gap: 8px; white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-
         .status-dot {
             width: 12px; height: 12px; background-color: #00ff88;
             border-radius: 50%; animation: signal-glow 1.5s infinite;
         }
-
         @keyframes signal-glow {
             0% { box-shadow: 0 0 5px #00ff88; transform: scale(1); }
             50% { box-shadow: 0 0 25px #00ff88; transform: scale(1.3); }
@@ -176,33 +139,19 @@
         }
 
         .hero {
-            position: relative; width: 100%; height: 95vh;
-            background-color: #111; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            overflow: hidden;
+            position: relative; width: 100%; height: 95vh; background-color: #111; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden;
         }
-        
         .hero-video-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 0; pointer-events: none;
-            background-color: #000;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; pointer-events: none; background-color: #000;
         }
-        
         .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.20)); 
-            z-index: 1; pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.20)); z-index: 1; pointer-events: none;
         }
-
-        .hero-main-content {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; z-index: 10;
-        }
-
+        .hero-main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 10; }
         .text-wrapper { position: relative; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; }
-        
         .anim-text {
             position: absolute; font-size: 38px; font-weight: 900; color: #fff;
             text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);
@@ -227,9 +176,7 @@
             transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5); margin-top: 10px;
         }
-        .copy-number-wrapper:active {
-            transform: scale(0.95); background: rgba(255, 202, 8, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
+        .copy-number-wrapper:active { transform: scale(0.95); background: rgba(255, 202, 8, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.8); }
         .copy-icon { font-size: 28px; }
         .number-text { font-size: 32px; font-weight: 900; color: var(--text-white); letter-spacing: 2px; }
         
@@ -240,10 +187,7 @@
             box-shadow: 0 5px 15px rgba(0,255,136,0.4); white-space: nowrap;
         }
         .copy-feedback.show { animation: floatUp 0.8s ease-out forwards; }
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translate(-50%, -50%); }
-            100% { opacity: 0; transform: translate(-50%, -200%); }
-        }
+        @keyframes floatUp { 0% { opacity: 1; transform: translate(-50%, -50%); } 100% { opacity: 0; transform: translate(-50%, -200%); } }
 
         .copy-instruction {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -252,180 +196,111 @@
             animation: bounce 1.5s infinite ease-in-out; pointer-events: none;
         }
         .copy-instruction .arrow-up {
-            width: 32px; height: 32px; margin-bottom: 5px;
-            stroke: var(--taxi-yellow); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            width: 32px; height: 32px; margin-bottom: 5px; stroke: var(--taxi-yellow); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
         .sticky-call {
             position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px;
             background: #ffca08; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 26px; text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999;
-            animation: pulse-button 2s infinite;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999; animation: pulse-button 2s infinite;
         }
-
         @keyframes pulse-button {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0.7); }
             70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 202, 8, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
-        /* ANA EKRANA EKLE BAR */
+        /* ANA EKRANA EKLE (PWA) BİLDİRİM BARI (Alt Kısım) */
         .pwa-banner {
-            position: fixed;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 100px);
-            max-width: 430px;
-            background: rgba(15, 15, 15, 0.96);
-            border: 1.5px solid var(--taxi-yellow);
-            border-radius: 20px;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 100px); max-width: 430px; background: rgba(15, 15, 15, 0.96);
+            border: 1.5px solid var(--taxi-yellow); border-radius: 20px; padding: 10px 12px;
+            display: flex; align-items: center; gap: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(255, 202, 8, 0.2);
-            z-index: 9990;
-            box-sizing: border-box;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 9990; box-sizing: border-box; transition: opacity 0.2s ease, transform 0.2s ease;
         }
-        .pwa-banner.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: translate(-50%, 20px);
-        }
+        .pwa-banner.hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 20px); }
         .pwa-icon-box {
-            width: 42px;
-            height: 48px;
-            background: var(--taxi-yellow);
-            border-radius: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 0 12px rgba(255, 202, 8, 0.45);
+            width: 42px; height: 48px; background: var(--taxi-yellow); border-radius: 11px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 12px rgba(255, 202, 8, 0.45);
         }
-        .pwa-icon-inner {
-            width: 26px;
-            height: 34px;
-            background: #ffffff;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .pwa-icon-inner svg {
-            width: 16px;
-            height: 16px;
-            stroke: #f59e0b;
-            stroke-width: 3;
-        }
-        .pwa-content {
-            flex: 1;
-            min-width: 0;
-            text-align: left;
-        }
-        .pwa-title {
-            font-size: 14px;
-            font-weight: 900;
-            color: #ffffff;
-            margin: 0 0 2px 0;
-            line-height: 1.2;
-        }
-        .pwa-desc {
-            font-size: 11px;
-            font-weight: 600;
-            color: #d1d5db;
-            margin: 0;
-            line-height: 1.25;
-        }
+        .pwa-icon-inner { width: 26px; height: 34px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .pwa-icon-inner svg { width: 16px; height: 16px; stroke: #f59e0b; stroke-width: 3; }
+        .pwa-content { flex: 1; min-width: 0; text-align: left; }
+        .pwa-title { font-size: 14px; font-weight: 900; color: #ffffff; margin: 0 0 2px 0; line-height: 1.2; }
+        .pwa-desc { font-size: 11px; font-weight: 600; color: #d1d5db; margin: 0; line-height: 1.25; }
         .pwa-install-btn {
-            background: linear-gradient(135deg, var(--taxi-yellow), var(--taxi-orange));
-            color: #000000;
-            border: none;
-            border-radius: 12px;
-            padding: 9px 12px;
-            font-size: 11.5px;
-            font-weight: 900;
-            letter-spacing: 0.3px;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(255, 202, 8, 0.35);
-            transition: transform 0.15s ease;
-        }
-        .pwa-install-btn:active {
-            transform: scale(0.95);
+            background: linear-gradient(135deg, var(--taxi-yellow), var(--taxi-orange)); color: #000000;
+            border: none; border-radius: 12px; padding: 9px 12px; font-size: 11.5px; font-weight: 900;
+            cursor: pointer; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 12px rgba(255, 202, 8, 0.35);
         }
         .pwa-close-btn {
-            background: rgba(255, 255, 255, 0.08);
-            color: #9ca3af;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            flex-shrink: 0;
-            padding: 0;
-            line-height: 1;
+            background: rgba(255, 255, 255, 0.08); color: #9ca3af; border: 1px solid rgba(255, 255, 255, 0.14);
+            width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: bold; cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1;
         }
 
-        .about-wrap { 
-            position: relative; padding: 100px 5%; display: flex;
-            justify-content: center; align-items: center; overflow: hidden; background-color: #111;
+        /* İOS (İPHONE) MANUEL YÜKLEME MODALI CSS (REFERANS KODUNDAN BİREBİR) */
+        .ios-pwa-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.86);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 98000; display: none; align-items: center; justify-content: center;
+            padding: 16px; opacity: 0; transition: opacity 0.3s ease;
         }
-        
-        .about-video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 0; transition: opacity 0.5s ease; opacity: 0;
+        .ios-pwa-overlay.show { display: flex; opacity: 1; }
+        .ios-pwa-card {
+            background: #1A1D20; color: #fff; border: 2.5px solid #FFC107;
+            border-radius: 24px; padding: 24px 20px; width: 100%; max-width: 395px;
+            text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.7); position: relative;
         }
+        .ios-pwa-card h4 { font-size: 18px; font-weight: 900; color: #FFC107; margin-bottom: 8px; }
+        .ios-pwa-card p { font-size: 12.5px; font-weight: 600; color: #E2E8F0; line-height: 1.5; margin-bottom: 14px; }
+        .ios-step-box {
+            background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 193, 7, 0.35);
+            border-radius: 14px; padding: 14px; text-align: left; font-size: 12px;
+            font-weight: 700; color: #fff; line-height: 1.55; margin-bottom: 16px;
+        }
+        .ios-step-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .ios-step-item:last-child { margin-bottom: 0; }
+        .ios-step-badge {
+            width: 28px; height: 28px; border-radius: 8px; background: #FFC107;
+            color: #1A1D20; font-weight: 900; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 13px;
+        }
+        .ios-pwa-close-btn {
+            width: 100%; padding: 13px; background: #FFC107; color: #1A1D20;
+            border: none; border-radius: 12px; font-size: 13.5px; font-weight: 900;
+            cursor: pointer; text-transform: uppercase;
+        }
+
+        .about-wrap { position: relative; padding: 100px 5%; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: #111; }
+        .about-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 0.5s ease; opacity: 0; }
         .about-video-bg.loaded { opacity: 1; }
-
-        .about-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)); z-index: 1; pointer-events: none;
-        }
-
+        .about-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)); z-index: 1; pointer-events: none; }
         .about-box {
             position: relative; z-index: 2; background: rgba(0, 0, 0, 0.25);
             backdrop-filter: var(--gb-blur); -webkit-backdrop-filter: var(--gb-blur);
             padding: 60px 40px; border-radius: 40px; width: 100%; max-width: 1100px; 
             margin: 0 auto; border: 1px solid var(--glass-border); box-shadow: 0 40px 80px rgba(0,0,0,0.6); box-sizing: border-box;
         }
-
         .about-title { color: var(--taxi-yellow); text-align: center; font-size: 2.8rem; font-weight: 900; margin-bottom: 30px; }
         .about-text { font-size: 1.2rem; line-height: 1.8; color: #f0f0f0; text-align: center; margin-bottom: 40px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-
         .why-us-card {
             background: rgba(255, 202, 8, 0.12); padding: 35px; border-radius: 25px; 
             border-left: 5px solid var(--taxi-yellow); text-align: left; margin-bottom: 50px;
         }
-
         .why-us-card h3 { color: var(--taxi-yellow); margin-top: 0; font-size: 1.5rem; margin-bottom: 15px; }
         .why-us-list { list-style: none; padding: 0; margin: 0; }
         .why-us-list li { margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
-
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .f-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        
         .icon {
             width: 75px; height: 75px; background: var(--taxi-yellow); border-radius: 50%;
             display: flex; justify-content: center; align-items: center; font-size: 35px;
             margin-bottom: 15px; border: 3px solid white; box-shadow: 0 0 20px rgba(255, 202, 8, 0.4);
         }
-        
         .f-title { font-weight: 800; font-size: 16px; color: var(--taxi-yellow); text-transform: uppercase; margin-bottom: 5px; }
         .f-desc { font-size: 13px; color: #ccc; }
 
@@ -434,50 +309,30 @@
         @media (max-width: 768px) {
             .site-logo { height: 53px; }
             .logo-text-desktop { display: none; }
-            
             .logo-text-mobile { 
                 display: flex; align-items: center; gap: 10px; text-align: left;
-                line-height: 1.15; letter-spacing: -0.3px;
-                text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+                line-height: 1.15; letter-spacing: -0.3px; text-shadow: 0 2px 8px rgba(0,0,0,0.9);
             }
-            .logo-col-yellow { 
-                color: var(--taxi-yellow); font-weight: 900; font-size: 1.15rem; 
-            }
-            .logo-col-white { 
-                color: #fff; font-weight: 700; font-size: 0.95rem;
-            }
-            
+            .logo-col-yellow { color: var(--taxi-yellow); font-weight: 900; font-size: 1.15rem; }
+            .logo-col-white { color: #fff; font-weight: 700; font-size: 0.95rem; }
             .status-active { font-size: 0.65rem; padding: 6px 12px; }
             .hero { height: 94vh; }
-            
             .hero-main-content { transform: translateY(-3vh); } 
-            
             .anim-text { font-size: 24px; }
             .btn-container { flex-direction: column; align-items: center; gap: 12px; margin: 15px 0; }
             .my-btn { width: 90%; height: 75px; font-size: 17px; }
-            
             .sticky-call { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 12px; }
             .copy-number-wrapper { padding: 8px 20px; gap: 10px; border-radius: 30px; margin-top: 5px; }
             .copy-icon { font-size: 20px; }
             .number-text { font-size: 22px; }
-            
             .copy-instruction { font-size: 14px; margin-top: 10px; }
             .copy-instruction .arrow-up { width: 26px; height: 26px; margin-bottom: 2px; }
 
             .pwa-banner {
-                left: 10px;
-                right: 66px;
-                bottom: 10px;
-                width: auto;
-                max-width: none;
-                transform: none;
-                padding: 8px 10px;
-                gap: 8px;
-                border-radius: 16px;
+                left: 10px; right: 66px; bottom: 10px; width: auto; max-width: none;
+                transform: none; padding: 8px 10px; gap: 8px; border-radius: 16px;
             }
-            .pwa-banner.hidden {
-                transform: translateY(20px);
-            }
+            .pwa-banner.hidden { transform: translateY(20px); }
             .pwa-icon-box { width: 36px; height: 42px; border-radius: 9px; }
             .pwa-icon-inner { width: 22px; height: 28px; border-radius: 5px; }
             .pwa-title { font-size: 12.5px; }
@@ -485,31 +340,18 @@
             .pwa-install-btn { padding: 8px 10px; font-size: 10.5px; border-radius: 10px; }
 
             .about-wrap { padding: 40px 0; } 
-            
             .about-box { 
-                width: 85%;
-                margin: 0 auto; 
-                padding: 30px 15px; 
-                border-radius: 25px; 
-                background: rgba(0, 0, 0, 0.75);
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
+                width: 85%; margin: 0 auto; padding: 30px 15px; border-radius: 25px; 
+                background: rgba(0, 0, 0, 0.75); backdrop-filter: none; -webkit-backdrop-filter: none;
             } 
-            
             .about-title { font-size: 1.8rem; margin-bottom: 20px; }
             .about-text { font-size: 1rem; margin-bottom: 25px; }
-            
             .why-us-card { 
-                padding: 15px; 
-                background: rgba(0, 0, 0, 0.4);
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border-left: 3px solid var(--taxi-yellow);
-                margin-bottom: 30px;
+                padding: 15px; background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: none; -webkit-backdrop-filter: none; border-left: 3px solid var(--taxi-yellow); margin-bottom: 30px;
             }
             .why-us-card h3 { font-size: 1.3rem; }
             .why-us-list li { font-size: 0.95rem; }
-            
             .features-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             .icon { width: 50px; height: 50px; font-size: 22px; margin-bottom: 10px; }
             .f-title { font-size: 12px; }
@@ -585,9 +427,28 @@
                 <p class="pwa-title" id="pwaTitle">Ana Ekrana Ekle</p>
                 <p class="pwa-desc" id="pwaDesc">Kampanyalar ve hızlı rezervasyon için cihazınıza yükleyin.</p>
             </div>
-            <button type="button" id="pwaInstallBtn" class="pwa-install-btn">HEMEN YÜKLE</button>
-            <button type="button" id="pwaCloseBtn" class="pwa-close-btn" aria-label="Bildirimi Kapat">✕</button>
+            <button type="button" id="pwaInstallBtn" class="pwa-install-btn" onclick="triggerPWAInstall()">HEMEN YÜKLE</button>
+            <button type="button" id="pwaCloseBtn" class="pwa-close-btn" aria-label="Bildirimi Kapat" onclick="closePwaBanner()">✕</button>
         </aside>
+
+        <!-- SADECE İOS (İPHONE) İÇİN BİLGİLENDİRME MODALI -->
+        <div id="iosPwaModal" class="ios-pwa-overlay" onclick="if(event.target===this) closeIosPwaModal()" role="dialog" aria-modal="true">
+            <div class="ios-pwa-card">
+                <h4 id="iosPwaTitle"> iPhone Ana Ekranına Ekle</h4>
+                <p>Apple güvenlik kuralları gereği iPhone cihazlarda uygulamayı ana ekranınıza eklemek için şu 2 adımı uygulayın:</p>
+                <div class="ios-step-box">
+                    <div class="ios-step-item">
+                        <div class="ios-step-badge">1</div>
+                        <div>Safari ekranının altındaki <strong>Paylaş (Yukarı Ok 📤)</strong> simgesine dokunun.</div>
+                    </div>
+                    <div class="ios-step-item">
+                        <div class="ios-step-badge">2</div>
+                        <div>Açılan menüyü kaydırıp <strong>"Ana Ekrana Ekle (➕)"</strong> seçeneğine basın ve sağ üstten <strong>"Ekle"</strong> deyin.</div>
+                    </div>
+                </div>
+                <button type="button" class="ios-pwa-close-btn" onclick="closeIosPwaModal()">ANLADIM, KAPAT</button>
+            </div>
+        </div>
 
         <div class="neon-bar"></div>
 
@@ -731,71 +592,89 @@
             }
 
             /* =====================================================================
-               DOĞRUDAN TIKLAYINCA İNDİREN PWA SİSTEMİ (REKLAM PANELİ MANTIĞI)
+               DOĞRUDAN UYGULAMA İNDİRME MANTIĞI (REKLAM PANELİ VE RENTECAR İLE BİREBİR)
                ===================================================================== */
+            let deferredPrompt = null;
             const pwaBanner = document.getElementById('pwaBanner');
-            const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-            const pwaCloseBtn = document.getElementById('pwaCloseBtn');
-            const pwaDesc = document.getElementById('pwaDesc');
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+            // 1. Standalone (Zaten yüklü mü?) Kontrolü
             function standaloneMu() {
                 try {
                     return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
                 } catch (e) { return false; }
             }
 
-            function bildirimiGoster() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            // 2. Banner'ı Gösterme Mantığı
+            function checkPwaBanner() {
                 if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
-                    pwaBanner.classList.remove('hidden');
+                    if (pwaBanner) {
+                        pwaBanner.classList.remove('hidden');
+                    }
                 }
             }
 
-            // PC veya Android'de kurulum paketi hazırsa veya iPhone ise anında göster
-            if (window.__kurulumOlayi || isIOS) {
-                bildirimiGoster();
-            }
-
-            window.addEventListener('beforeinstallprompt', function (e) {
+            // 3. Android/PC için paket hazırlandığında yakala
+            window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
-                window.__kurulumOlayi = e;
-                bildirimiGoster();
+                deferredPrompt = e;
+                checkPwaBanner(); 
             });
 
-            window.addEventListener('appinstalled', function () {
-                window.__kurulumOlayi = null;
-                window.__hemenKurBekliyor = false;
-                pwaBanner.classList.add('hidden');
-            });
+            // 4. iOS (iPhone) için direkt banner'ı göster (Paket gelmez çünkü)
+            if (isIOS) {
+                setTimeout(checkPwaBanner, 500);
+            }
 
-            pwaInstallBtn.addEventListener('click', function () {
-                // 1) PC ve Android: Tıklayınca doğrudan indirir / kısayol kurar
-                if (window.__kurulumOlayi) {
-                    try { window.__kurulumOlayi.prompt(); } catch (e) {}
-                    window.__kurulumOlayi = null;
-                    pwaBanner.classList.add('hidden');
+            // 5. Butona tıklandığında çalışacak Eylem
+            window.triggerPWAInstall = function() {
+                if (isIOS && !standaloneMu()) {
+                    const iosModal = document.getElementById('iosPwaModal');
+                    if (iosModal) {
+                        iosModal.style.display = 'flex';
+                        requestAnimationFrame(() => { iosModal.classList.add('show'); });
+                    }
                     return;
                 }
-                // 2) Sadece iPhone (iOS): Safari'den nasıl ekleyeceğini gösterir
-                if (isIOS) {
-                    pwaDesc.textContent = "Safari alt menüsündeki 'Paylaş' simgesine basıp 'Ana Ekrana Ekle'yi seçin.";
-                    pwaInstallBtn.textContent = "TAMAM";
-                    pwaInstallBtn.onclick = function () {
-                        pwaBanner.classList.add('hidden');
-                        try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
-                    };
-                    return;
+
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            if(pwaBanner) pwaBanner.classList.add('hidden');
+                        }
+                        deferredPrompt = null;
+                    });
                 }
-                // 3) Paket yükleniyorsa gelir gelmez otomatik tetikler
-                window.__hemenKurBekliyor = true;
+            };
+
+            window.closePwaBanner = function() {
+                if(pwaBanner) pwaBanner.classList.add('hidden');
+                try { sessionStorage.setItem('pwa_closed', '1'); } catch(e) {}
+            };
+
+            window.closeIosPwaModal = function() {
+                const iosModal = document.getElementById('iosPwaModal');
+                if (iosModal) {
+                    iosModal.classList.remove('show');
+                    setTimeout(() => { iosModal.style.display = 'none'; }, 300);
+                }
+            };
+
+            window.addEventListener('appinstalled', () => {
+                deferredPrompt = null;
+                if(pwaBanner) pwaBanner.classList.add('hidden');
             });
 
-            pwaCloseBtn.addEventListener('click', function () {
-                pwaBanner.classList.add('hidden');
-                try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
-            });
-        });
+            if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('sw.js').catch(() => {});
+                });
+            }
+        }); // DOMContentLoaded sonu
 
+        // Güvenlik Önlemleri
         document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
         document.addEventListener('dragstart', function (e) { e.preventDefault(); });
         document.addEventListener('copy', function (e) { e.preventDefault(); });
