@@ -720,11 +720,11 @@
                 videoObserver.observe(geceVid);
             }
 
-            /* Ana Ekrana Ekle (PWA) Bildirim Yönetimi */
-            /* Ana Ekrana Ekle (PWA) Otomatik Kurulum Yönetimi */
+           /* Ana Ekrana Ekle (PWA) - Garantili Gösterim Yönetimi */
             const pwaBanner = document.getElementById('pwaBanner');
             const pwaInstallBtn = document.getElementById('pwaInstallBtn');
             const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+            const pwaDesc = document.getElementById('pwaDesc');
             let kurulumOlayi = null;
 
             function standaloneMu() {
@@ -733,46 +733,60 @@
                 } catch (e) { return false; }
             }
 
-            // Uygulama zaten yüklüyse veya henüz otomatik kurulum hazır değilse gizle
             pwaBanner.classList.add('hidden');
 
-            window.addEventListener('beforeinstallprompt', function (e) {
+            if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
+                setTimeout(() => {
+                    pwaBanner.classList.remove('hidden');
+                }, 3000);
+            }
+
+            window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 kurulumOlayi = e;
-                if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
-                    pwaBanner.classList.remove('hidden');
-                }
             });
 
-            window.addEventListener('appinstalled', function () {
+            window.addEventListener('appinstalled', () => {
                 kurulumOlayi = null;
                 pwaBanner.classList.add('hidden');
             });
 
-            pwaInstallBtn.addEventListener('click', function () {
+            pwaInstallBtn.addEventListener('click', async () => {
                 if (kurulumOlayi) {
-                    try { kurulumOlayi.prompt(); } catch (e) {}
+                    kurulumOlayi.prompt();
+                    try {
+                        const { outcome } = await kurulumOlayi.userChoice;
+                        if (outcome === 'accepted') {
+                            pwaBanner.classList.add('hidden');
+                        }
+                    } catch (err) {}
                     kurulumOlayi = null;
-                    pwaBanner.classList.add('hidden');
+                } else {
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                    pwaDesc.textContent = isIOS
+                        ? "Tarayıcınızın altındaki 'Paylaş' butonuna basıp 'Ana Ekrana Ekle'yi seçin."
+                        : "Tarayıcınızın sağ üst menüsünden (⋮) 'Ana ekrana ekle' seçeneğine dokunun.";
+                    pwaInstallBtn.textContent = "TAMAM";
+                    pwaInstallBtn.onclick = () => {
+                        pwaBanner.classList.add('hidden');
+                        sessionStorage.setItem('pwa_closed', '1');
+                    };
                 }
             });
 
-            pwaCloseBtn.addEventListener('click', function () {
+            pwaCloseBtn.addEventListener('click', () => {
                 pwaBanner.classList.add('hidden');
                 try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
             });
 
             if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
-                window.addEventListener('load', function () {
-                    navigator.serviceWorker.register('sw.js').catch(function () {});
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('sw.js').catch(() => {});
                 });
             }
-            pwaCloseBtn.addEventListener('click', () => {
-                pwaBanner.classList.add('hidden');
-                try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
-            });
-        });
+        }); // DOMContentLoaded sonu
 
+        // Güvenlik Önlemleri
         document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
         document.addEventListener('dragstart', function (e) { e.preventDefault(); });
         document.addEventListener('copy', function (e) { e.preventDefault(); });
