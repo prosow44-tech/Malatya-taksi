@@ -11,7 +11,25 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Malatya Taksi">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="Malatya Taksi.jpg">
     <link rel="apple-touch-icon" href="Malatya Taksi.jpg">
+
+    <script>
+      window.__kurulumOlayi = null;
+      window.__hemenKurBekliyor = false;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        window.__kurulumOlayi = e;
+        if (window.__hemenKurBekliyor) {
+          window.__hemenKurBekliyor = false;
+          try { e.prompt(); } catch (err) {}
+        }
+      });
+      if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      }
+    </script>
 
     <link rel="preload" as="video" href="ana-sayfa-1.mp4" fetchpriority="high" type="video/mp4">
 
@@ -92,7 +110,6 @@
             z-index: 1001; position: relative;
         }
 
-        /* ÜST MENÜ ŞEFFAF YAPILDI - VİDEO ARKADAN TAM GÖZÜKÜR */
         header {
             background: transparent;
             backdrop-filter: none;
@@ -258,9 +275,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
-        /* =================================================================
-           ANA EKRANA EKLE (UYGULAMA BİLDİRİMİ) - PERFORMANS DOSTU & KAPATILABİLİR
-           ================================================================= */
+        /* ANA EKRANA EKLE BAR */
         .pwa-banner {
             position: fixed;
             bottom: 16px;
@@ -278,7 +293,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(255, 202, 8, 0.2);
             z-index: 9990;
             box-sizing: border-box;
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
         .pwa-banner.hidden {
             opacity: 0;
@@ -365,10 +380,6 @@
             padding: 0;
             line-height: 1;
         }
-        .pwa-close-btn:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.18);
-        }
 
         .about-wrap { 
             position: relative; padding: 100px 5%; display: flex;
@@ -453,7 +464,6 @@
             .copy-instruction { font-size: 14px; margin-top: 10px; }
             .copy-instruction .arrow-up { width: 26px; height: 26px; margin-bottom: 2px; }
 
-            /* Mobil ekranlarda sağ alttaki arama butonuna çarpmadan sol-alt alana yerleşir */
             .pwa-banner {
                 left: 10px;
                 right: 66px;
@@ -562,8 +572,8 @@
 
         <a href="tel:05332153481" class="sticky-call" aria-label="Hızlı Arama Butonu" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞</a>
 
-        <!-- KAPATILABİLİR ANA EKRANA EKLE (UYGULAMA BİLDİRİMİ) -->
-        <aside id="pwaBanner" class="pwa-banner" aria-label="Uygulama Yükleme Bildirimi">
+        <!-- ANA EKRANA EKLE BAR -->
+        <aside id="pwaBanner" class="pwa-banner hidden" aria-label="Uygulama Yükleme Bildirimi">
             <div class="pwa-icon-box" aria-hidden="true">
                 <div class="pwa-icon-inner">
                     <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -720,12 +730,14 @@
                 videoObserver.observe(geceVid);
             }
 
-           /* Ana Ekrana Ekle (PWA) - Garantili Gösterim Yönetimi */
+            /* =====================================================================
+               DOĞRUDAN TIKLAYINCA İNDİREN PWA SİSTEMİ (REKLAM PANELİ MANTIĞI)
+               ===================================================================== */
             const pwaBanner = document.getElementById('pwaBanner');
             const pwaInstallBtn = document.getElementById('pwaInstallBtn');
             const pwaCloseBtn = document.getElementById('pwaCloseBtn');
             const pwaDesc = document.getElementById('pwaDesc');
-            let kurulumOlayi = null;
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
             function standaloneMu() {
                 try {
@@ -733,60 +745,57 @@
                 } catch (e) { return false; }
             }
 
-            pwaBanner.classList.add('hidden');
-
-            if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
-                setTimeout(() => {
+            function bildirimiGoster() {
+                if (!standaloneMu() && sessionStorage.getItem('pwa_closed') !== '1') {
                     pwaBanner.classList.remove('hidden');
-                }, 3000);
+                }
             }
 
-            window.addEventListener('beforeinstallprompt', (e) => {
+            // PC veya Android'de kurulum paketi hazırsa veya iPhone ise anında göster
+            if (window.__kurulumOlayi || isIOS) {
+                bildirimiGoster();
+            }
+
+            window.addEventListener('beforeinstallprompt', function (e) {
                 e.preventDefault();
-                kurulumOlayi = e;
+                window.__kurulumOlayi = e;
+                bildirimiGoster();
             });
 
-            window.addEventListener('appinstalled', () => {
-                kurulumOlayi = null;
+            window.addEventListener('appinstalled', function () {
+                window.__kurulumOlayi = null;
+                window.__hemenKurBekliyor = false;
                 pwaBanner.classList.add('hidden');
             });
 
-            pwaInstallBtn.addEventListener('click', async () => {
-                if (kurulumOlayi) {
-                    kurulumOlayi.prompt();
-                    try {
-                        const { outcome } = await kurulumOlayi.userChoice;
-                        if (outcome === 'accepted') {
-                            pwaBanner.classList.add('hidden');
-                        }
-                    } catch (err) {}
-                    kurulumOlayi = null;
-                } else {
-                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-                    pwaDesc.textContent = isIOS
-                        ? "Tarayıcınızın altındaki 'Paylaş' butonuna basıp 'Ana Ekrana Ekle'yi seçin."
-                        : "Tarayıcınızın sağ üst menüsünden (⋮) 'Ana ekrana ekle' seçeneğine dokunun.";
-                    pwaInstallBtn.textContent = "TAMAM";
-                    pwaInstallBtn.onclick = () => {
-                        pwaBanner.classList.add('hidden');
-                        sessionStorage.setItem('pwa_closed', '1');
-                    };
+            pwaInstallBtn.addEventListener('click', function () {
+                // 1) PC ve Android: Tıklayınca doğrudan indirir / kısayol kurar
+                if (window.__kurulumOlayi) {
+                    try { window.__kurulumOlayi.prompt(); } catch (e) {}
+                    window.__kurulumOlayi = null;
+                    pwaBanner.classList.add('hidden');
+                    return;
                 }
+                // 2) Sadece iPhone (iOS): Safari'den nasıl ekleyeceğini gösterir
+                if (isIOS) {
+                    pwaDesc.textContent = "Safari alt menüsündeki 'Paylaş' simgesine basıp 'Ana Ekrana Ekle'yi seçin.";
+                    pwaInstallBtn.textContent = "TAMAM";
+                    pwaInstallBtn.onclick = function () {
+                        pwaBanner.classList.add('hidden');
+                        try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
+                    };
+                    return;
+                }
+                // 3) Paket yükleniyorsa gelir gelmez otomatik tetikler
+                window.__hemenKurBekliyor = true;
             });
 
-            pwaCloseBtn.addEventListener('click', () => {
+            pwaCloseBtn.addEventListener('click', function () {
                 pwaBanner.classList.add('hidden');
                 try { sessionStorage.setItem('pwa_closed', '1'); } catch (e) {}
             });
+        });
 
-            if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('sw.js').catch(() => {});
-                });
-            }
-        }); // DOMContentLoaded sonu
-
-        // Güvenlik Önlemleri
         document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
         document.addEventListener('dragstart', function (e) { e.preventDefault(); });
         document.addEventListener('copy', function (e) { e.preventDefault(); });
