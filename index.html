@@ -82,7 +82,7 @@
             user-select: none;
         }
         img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
-        .my-btn, .sticky-call, a, .copy-number-wrapper, .pwa-banner, .pwa-install-btn, .pwa-close-btn, .ios-pwa-overlay { pointer-events: auto; }
+        .my-btn, .sticky-call, a, .copy-number-wrapper, .pwa-banner, .pwa-install-btn, .pwa-close-btn, .ios-pwa-overlay, .ios-pwa-close-btn { pointer-events: auto; }
 
         @keyframes flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
         .neon-bar {
@@ -212,7 +212,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 202, 8, 0); }
         }
 
-        /* ANA EKRANA EKLE (PWA) BİLDİRİM BARI (Alt Kısım) */
+        /* PWA BİLDİRİM BARI (ALT KISIM) */
         .pwa-banner {
             position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 100px); max-width: 430px; background: rgba(15, 15, 15, 0.96);
@@ -242,7 +242,7 @@
             font-size: 12px; font-weight: bold; cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1;
         }
 
-        /* İOS (İPHONE) MANUEL YÜKLEME MODALI CSS (REFERANS KODUNDAN BİREBİR) */
+        /* İOS (İPHONE) MANUEL YÜKLEME MODALI CSS */
         .ios-pwa-overlay {
             position: fixed; inset: 0; background: rgba(15, 23, 42, 0.86);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -414,7 +414,7 @@
 
         <a href="tel:05332153481" class="sticky-call" aria-label="Hızlı Arama Butonu" onclick="gtag('event', 'conversion', {'send_to': 'AW-16894468875/iZ9vCNHC1aMaEIvG9Pc-'});">📞</a>
 
-        <!-- ANA EKRANA EKLE BAR -->
+        <!-- ANA EKRANA EKLE BAR (PWA) -->
         <aside id="pwaBanner" class="pwa-banner hidden" aria-label="Uygulama Yükleme Bildirimi">
             <div class="pwa-icon-box" aria-hidden="true">
                 <div class="pwa-icon-inner">
@@ -425,7 +425,7 @@
             </div>
             <div class="pwa-content">
                 <p class="pwa-title" id="pwaTitle">Ana Ekrana Ekle</p>
-                <p class="pwa-desc" id="pwaDesc">Kampanyalar ve hızlı rezervasyon için cihazınıza yükleyin.</p>
+                <p class="pwa-desc" id="pwaDesc">Taksi çağırmak ve hizmetlerimiz için cihazınıza yükleyin.</p>
             </div>
             <button type="button" id="pwaInstallBtn" class="pwa-install-btn" onclick="triggerPWAInstall()">HEMEN YÜKLE</button>
             <button type="button" id="pwaCloseBtn" class="pwa-close-btn" aria-label="Bildirimi Kapat" onclick="closePwaBanner()">✕</button>
@@ -592,7 +592,7 @@
             }
 
             /* =====================================================================
-               DOĞRUDAN UYGULAMA İNDİRME MANTIĞI (REKLAM PANELİ VE RENTECAR İLE BİREBİR)
+               DOĞRUDAN UYGULAMA İNDİRME MANTIĞI (RENTECAR İLE BİREBİR)
                ===================================================================== */
             let deferredPrompt = null;
             const pwaBanner = document.getElementById('pwaBanner');
